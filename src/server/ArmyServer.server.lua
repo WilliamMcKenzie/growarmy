@@ -2,8 +2,9 @@ local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local DataStoreService = game:GetService("DataStoreService")
-local Debris = game:GetService("Debris")
 local C = require(RS:WaitForChild("ArmyConfig"))
+local Movement = require(script.Parent:WaitForChild("TroopMovement"))
+local Combat = require(script.Parent:WaitForChild("TroopCombat"))
 local remote = Instance.new("RemoteEvent", RS)
 remote.Name = "ArmyAction"
 local fx = Instance.new("RemoteEvent", RS)
@@ -14,7 +15,7 @@ local profiles, camps = {}, {}
 local store = not RunService:IsStudio() and DataStoreService:GetDataStore("GrowArmyPrototype_v1") or nil
 local uid = 0
 local Avatars = require(script.Parent:WaitForChild("AvatarTemplates"))
-local roamingRandom = Random.new()
+local rosterRandom = Random.new()
 
 local function flat(v) return Vector3.new(v.X, 0, v.Z) end
 local function root(player) return player.Character and player.Character:FindFirstChild("HumanoidRootPart") end
@@ -24,12 +25,6 @@ local function atBase(player)
 end
 local function paint(u, friendly)
  u.model:SetAttribute("OwnerId", friendly and friendly.UserId or 0)
-end
-local function move(u, position, face)
- u.pos = position
- local target = face or position + Vector3.new(0,0,-1)
- if flat(target-position).Magnitude < 0.01 then target = position+Vector3.new(0,0,-1) end
- u.model.PrimaryPart.CFrame = CFrame.lookAt(position, Vector3.new(target.X,position.Y,target.Z))
 end
 local function createUnit(class, pos, owner, earned)
  uid += 1
@@ -41,8 +36,8 @@ local function createUnit(class, pos, owner, earned)
  model.PrimaryPart=marker
  model:SetAttribute("Class",class)
  model:SetAttribute("AttackSequence",0)
- local u={class=class,model=model,pos=pos,hp=C.Classes[class].Health,nextAttack=0,earned=earned or 0,owner=owner}
- paint(u,owner);move(u,pos);model.Parent=troops
+ local u={class=class,model=model,pos=pos,hp=C.Classes[class].Stats.Health,nextAttack=0,earned=earned or 0,owner=owner,movementState={},combatState={}}
+ paint(u,owner);Movement.place(u,pos);model.Parent=troops
  return u
 end
 local function clear(units)
@@ -111,7 +106,7 @@ for _,p in ipairs(workspace.Map:GetChildren()) do
   local roster={}
   local n=ring==1 and 3 or ring==2 and 7 or 12
   for i=1,n do
-   roster[i]=(ring>=2 and i%5==0) and "Rocketeer" or (index%2==0 and i%3==0 or ring==3 and i%2==0) and "Archer" or "Swordsman"
+   roster[i]=C.rollClass(rosterRandom,ring)
   end
   local camp={pos=Vector3.new(p.Position.X,0.3,p.Position.Z),roster=roster,units={},ring=ring}
   table.insert(camps,camp)
@@ -142,13 +137,12 @@ local function action(player,verb)
   equip(player)
   announce(player,"Banked "..amount.." gold! Your starting squad is ready.")
  elseif verb=="Upgrade" or verb=="Recruit" then
-  if C.starterCount(p.starter)>=C.StarterCap then announce(player,"Prototype starter squad maxed: 12 troops.");return end
+  if C.starterCount(p.starter)>=C.StarterCap then announce(player,"Prototype starter squad maxed: "..C.StarterCap.." troops.");return end
   local cost=verb=="Upgrade" and C.upgradeCost(p.starter) or C.rollCost(p.starter)
   if p.gold<cost then announce(player,"You need "..cost.." gold.");return end
   local class="Swordsman"
   if verb=="Recruit" then
-   local roll=math.random(100)
-   class=roll<=60 and "Swordsman" or roll<=90 and "Archer" or "Rocketeer"
+   class=C.rollClass(rosterRandom)
   end
   p.gold-=cost;p.starter[class]+=1
   local r=root(player)
@@ -163,66 +157,8 @@ for _,verb in ipairs({"CashIn","Upgrade","Recruit"}) do
  workspace.Map[verb].Prompt.Triggered:Connect(function(player) action(player,verb) end)
 end
 
-local function nearest(u,enemies)
- local best,dist=nil,math.huge
- for _,v in ipairs(enemies) do
-  if v.hp>0 then local d=(v.pos-u.pos).Magnitude;if d<dist then best,dist=v,d end end
- end
- return best,dist
-end
-local function stepToward(u,target,dt,face,speed)
- local d=flat(target-u.pos)
- local pos=u.pos
- if d.Magnitude>0.1 then pos+=d.Unit*math.min(d.Magnitude,(speed or C.Classes[u.class].Speed)*dt) end
- move(u,pos,face or target)
-end
-local function pickRoamTarget(u,center)
- local angle=roamingRandom:NextNumber(0,math.pi*2)
- -- Sample the disk evenly, leaving a little room inside the follow boundary.
- local radius=math.sqrt(roamingRandom:NextNumber())*C.Roaming.Radius*0.85
- u.roamTarget=Vector3.new(center.X+math.cos(angle)*radius,u.pos.Y,center.Z+math.sin(angle)*radius)
- u.roamSpeed=roamingRandom:NextNumber(C.Roaming.WalkSpeedMin,C.Roaming.WalkSpeedMax)
-end
-local function roam(u,center,dt)
- local settings=C.Roaming
- local outside=flat(u.pos-center).Magnitude>settings.Radius
- local arrived=u.roamTarget and flat(u.roamTarget-u.pos).Magnitude<=settings.ArrivalDistance
- if arrived then
-  u.returning=false
-  u.roamTarget=nil
- end
- -- Latch the run until arrival, even after crossing back inside the radius.
- if outside and not u.returning then
-  u.returning=true
-  u.roamTarget=nil
- end
- -- Destinations stay in world space. Only replace one if the master leaves it behind.
- if not u.roamTarget or flat(u.roamTarget-center).Magnitude>settings.Radius then
-  pickRoamTarget(u,center)
- end
- stepToward(u,u.roamTarget,dt,nil,u.returning and settings.ReturnSpeed or u.roamSpeed)
-end
-local function fight(units,enemies,now,dt)
- for _,u in ipairs(units) do
-  if u.hp<=0 then continue end
-  u.roamTarget=nil;u.returning=false
-  local target,d=nearest(u,enemies)
-  if not target then continue end
-  local s=C.Classes[u.class]
-  if d>s.Range then stepToward(u,target.pos,dt)
-  else
-   move(u,u.pos,target.pos)
-   if now>=u.nextAttack then
-    u.nextAttack=now+s.Cooldown
-    u.model:SetAttribute("AttackSequence",u.model:GetAttribute("AttackSequence")+1)
-    target.hp-=s.Damage
-    if s.Splash then
-     for _,v in ipairs(enemies) do if v~=target and (v.pos-target.pos).Magnitude<s.Splash then v.hp-=s.Damage*0.6 end end
-    end
-    fx:FireAllClients(u.pos+Vector3.new(0,2,0),target.pos+Vector3.new(0,2,0),u.class)
-   end
-  end
- end
+local function emitEffect(unit,target)
+ fx:FireAllClients(unit.pos+Vector3.new(0,2,0),target.pos+Vector3.new(0,2,0),unit.class)
 end
 local elapsed=0
 RunService.Heartbeat:Connect(function(dt)
@@ -253,8 +189,8 @@ RunService.Heartbeat:Connect(function(dt)
   end
   player:SetAttribute("InBattle",active~=nil)
   if active then
-   fight(p.units,active.units,now,dt)
-   fight(active.units,p.units,now,dt)
+   Combat.update(p.units,active.units,now,dt,emitEffect)
+   Combat.update(active.units,p.units,now,dt,emitEffect)
    for i=#p.units,1,-1 do
     local u=p.units[i]
     if u.hp<=0 then u.model:Destroy();table.remove(p.units,i) end
@@ -264,7 +200,8 @@ RunService.Heartbeat:Connect(function(dt)
     if u.hp<=0 then
      table.remove(active.units,i)
      if #p.units<C.ArmyCap and #p.units>0 then
-      u.hp=C.Classes[u.class].Health;u.owner=player;u.earned=C.Classes[u.class].Value;u.nextAttack=now+0.6
+      u.hp=C.Classes[u.class].Stats.Health;u.owner=player;u.earned=C.Classes[u.class].Stats.Value;u.nextAttack=now+0.6
+      Movement.reset(u);u.combatState={}
       paint(u,player);table.insert(p.units,u)
      else u.model:Destroy() end
     end
@@ -279,9 +216,11 @@ RunService.Heartbeat:Connect(function(dt)
    end
   else
    local healing=atBase(player)
+   local movementContext={center=r.Position,walkSpeed=humanoid.WalkSpeed}
    for _,u in ipairs(p.units) do
-    roam(u,r.Position,dt)
-    if healing then u.hp=C.Classes[u.class].Health end
+    u.combatState={}
+    Movement.update(u,movementContext,dt)
+    if healing then u.hp=C.Classes[u.class].Stats.Health end
    end
   end
   sync(player)
@@ -295,20 +234,13 @@ local function joined(player)
   data=result
  end
  if not player.Parent then return end
- local starter={Swordsman=4,Archer=0,Rocketeer=0}
- if type(data)=="table" and type(data.starter)=="table" then
-  local remaining=C.StarterCap
-  for _,class in ipairs(C.Order) do
-   local n=math.clamp(math.floor(tonumber(data.starter[class]) or starter[class]),class=="Swordsman" and 4 or 0,remaining)
-   starter[class]=n;remaining-=n
-  end
- end
+ local starter=C.restoreStarter(type(data)=="table" and data.starter or nil)
  profiles[player]={gold=type(data)=="table" and math.max(0,tonumber(data.gold) or 0) or 0,starter=starter,units={}}
  player:SetAttribute("SaveMode",store and "Progress saves" or "Studio • session-only progress")
  local function spawned(character)
   local humanoid=character:WaitForChild("Humanoid")
   character:WaitForChild("HumanoidRootPart")
-  humanoid.WalkSpeed=23
+  humanoid.WalkSpeed=C.PlayerWalkSpeed
   humanoid.DisplayDistanceType=Enum.HumanoidDisplayDistanceType.None
   task.spawn(Avatars.load,player,character)
   release(player);equip(player)
@@ -340,4 +272,4 @@ game:BindToClose(function()
   task.wait(0.1)
  until os.clock()>deadline
 end)
-print("Grow an Army ready: "..#camps.." camps, 3 classes, server-authoritative PvE.")
+print("Grow an Army ready: "..#camps.." camps, "..#C.Order.." classes, server-authoritative PvE.")

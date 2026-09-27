@@ -18,19 +18,15 @@ task.spawn(function()
 end)
 effect.OnClientEvent:Connect(function(from,to,class)
  local camera=workspace.CurrentCamera
- if (camera.CFrame.Position-from).Magnitude>180 then return end
+ if not camera or (camera.CFrame.Position-from).Magnitude>180 then return end
+ local visual=C.Classes[class].Visual
  local beam=Instance.new("Part")
  beam.Anchored=true;beam.CanCollide=false;beam.CanTouch=false;beam.CanQuery=false;beam.Material=Enum.Material.Neon
- beam.Color=C.Classes[class].Color
+ beam.Color=visual.Color
  local distance=(to-from).Magnitude
- beam.Size=Vector3.new(class=="Rocketeer" and 0.5 or 0.15,0.15,math.max(0.1,distance))
+ beam.Size=Vector3.new(visual.Effect.Width,0.15,math.max(0.1,distance))
  beam.CFrame=CFrame.lookAt((from+to)/2,to);beam.Parent=workspace
  TweenService:Create(beam,TweenInfo.new(0.16),{Transparency=1}):Play();Debris:AddItem(beam,0.2)
- if class=="Rocketeer" then
-  local blast=Instance.new("Part");blast.Shape=Enum.PartType.Ball;blast.Size=Vector3.new(1,1,1);blast.Position=to
-  blast.Color=C.Classes[class].Color;blast.Anchored=true;blast.CanCollide=false;blast.CanTouch=false;blast.CanQuery=false;blast.Material=Enum.Material.Neon;blast.Transparency=0.4;blast.Parent=workspace
-  TweenService:Create(blast,TweenInfo.new(0.3),{Size=Vector3.new(12,12,12),Transparency=1}):Play();Debris:AddItem(blast,0.35)
- end
 end)
 player.CameraMinZoomDistance=35
 player.CameraMaxZoomDistance=85

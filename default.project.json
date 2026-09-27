@@ -50,6 +50,9 @@
     "ReplicatedStorage": {
       "ArmyConfig": {
         "$path": "src/shared/ArmyConfig.lua"
+      },
+      "TroopDefinitions": {
+        "$path": "src/shared/TroopDefinitions.lua"
       }
     },
     "ServerScriptService": {
@@ -58,6 +61,12 @@
       },
       "AvatarTemplates": {
         "$path": "src/server/AvatarTemplates.lua"
+      },
+      "TroopMovement": {
+        "$path": "src/server/TroopMovement.lua"
+      },
+      "TroopCombat": {
+        "$path": "src/server/TroopCombat.lua"
       }
     },
     "StarterPlayer": {
@@ -71,6 +80,12 @@
         },
         "TroopVisuals": {
           "$path": "src/client/TroopVisuals.client.lua"
+        },
+        "TroopWeapons": {
+          "$path": "src/client/TroopWeapons.lua"
+        },
+        "TroopRadius": {
+          "$path": "src/client/TroopRadius.client.lua"
         }
       }
     }

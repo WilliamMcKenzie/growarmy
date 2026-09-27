@@ -6,11 +6,8 @@ Templates.Name = "ArmyAvatars"
 Templates.Parent = RS
 local AvatarTemplates = {}
 
-local function build(description, name)
- description.HeightScale = 1
- description.WidthScale = 1
- description.DepthScale = 1
- description.HeadScale = 1
+local function build(description, name, ownerScale)
+ -- Keep the owner's actual body proportions; type-specific scaling happens on the client.
  local model = Players:CreateHumanoidModelFromDescriptionAsync(description, Enum.HumanoidRigType.R15)
  model.Name = name
  local humanoid = model:FindFirstChildOfClass("Humanoid")
@@ -29,7 +26,7 @@ local function build(description, name)
    joint:Destroy()
   elseif joint:IsA("BallSocketConstraint") or joint:IsA("NoCollisionConstraint") then joint:Destroy() end
  end
- model:ScaleTo(0.65)
+ model:ScaleTo(ownerScale or 1)
  model:SetAttribute("RootHeight", humanoid.HipHeight + root.Size.Y / 2)
  for _,v in ipairs(model:GetDescendants()) do
   if v:IsA("BaseScript") or v:IsA("ModuleScript") then v:Destroy()
@@ -55,7 +52,7 @@ function AvatarTemplates.load(player, character)
   if not player.Parent or character ~= player.Character then return end
   local h = character:FindFirstChildOfClass("Humanoid")
   local description = h and h:GetAppliedDescription() or Players:GetHumanoidDescriptionFromUserIdAsync(player.UserId)
-  local model = build(description, tostring(player.UserId))
+  local model = build(description, tostring(player.UserId), character:GetScale())
   if not player.Parent then model:Destroy() end
  end)
  if not ok then warn("Troop avatar unavailable; using default rig: " .. tostring(err)) end
