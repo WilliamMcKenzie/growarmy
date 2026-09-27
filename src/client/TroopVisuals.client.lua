@@ -36,6 +36,7 @@ local function create(marker,template)
  local rig=template:Clone()
  rig.Name=marker.Name
  local class=marker:GetAttribute("Class")
+ local ranged=C.Classes[class].Combat.Behavior=="Ranged"
  local appearance=C.Classes[class].Visual
  Weapons.attach(rig,appearance.Weapon)
  rig:ScaleTo(rig:GetScale()*appearance.Scale)
@@ -43,7 +44,7 @@ local function create(marker,template)
  rig.Parent=visuals
  local tracks,procedural={},nil
  if rig:GetAttribute("RigType")=="R6" then
-  procedural=R6Animation.create(rig,C.Classes[class].Combat.Behavior=="Ranged")
+  procedural=R6Animation.create(rig,ranged)
  else
   local animator=rig:FindFirstChildOfClass("AnimationController"):FindFirstChildOfClass("Animator")
   tracks={
@@ -54,12 +55,12 @@ local function create(marker,template)
   }
  end
  if tracks.idle then tracks.idle:Play(.15) end
- if tracks.hold then tracks.hold:Play(.15) end
+ if tracks.hold and (not ranged or marker:GetAttribute("CombatMode")=="Aim") then tracks.hold:Play(.15) end
  local cf=marker.PrimaryPart.CFrame
  rig.PrimaryPart.CFrame=cf*CFrame.new(0,rig:GetAttribute("RootHeight"),0)
  local tag=UI.createTag(rig,class)
  UI.updateTag(tag,marker)
- return {rig=rig,template=template,class=class,owner=marker:GetAttribute("OwnerId"),tracks=tracks,procedural=procedural,tag=tag,cf=cf,lastTarget=cf.Position,lastSample=os.clock(),speed=0,attack=marker:GetAttribute("AttackSequence")}
+ return {rig=rig,template=template,class=class,ranged=ranged,owner=marker:GetAttribute("OwnerId"),tracks=tracks,procedural=procedural,tag=tag,cf=cf,lastTarget=cf.Position,lastSample=os.clock(),speed=0,attack=marker:GetAttribute("AttackSequence")}
 end
 RunService.RenderStepped:Connect(function(dt)
  local camera=workspace.CurrentCamera
@@ -96,16 +97,30 @@ RunService.RenderStepped:Connect(function(dt)
     elseif walk.IsPlaying then walk:Stop(.15) end
    end
   end
+  local mode=marker:GetAttribute("CombatMode") or "Idle"
+  local aiming=mode=="Aim"
+  local bowLowered=state.ranged and mode~="Aim" and mode~="Recover"
+  if state.ranged then
+   local hold=state.tracks.hold
+   if hold then
+    if aiming and not hold.IsPlaying then hold:Play(.12)
+    elseif not aiming and hold.IsPlaying then hold:Stop(.12) end
+   end
+   if bowLowered then
+    if state.tracks.attack and state.tracks.attack.IsPlaying then state.tracks.attack:Stop(.1) end
+    if state.procedural then state.procedural.attackUntil=0 end
+   end
+  end
   local attack=marker:GetAttribute("AttackSequence")
   if attack~=state.attack then
    state.attack=attack
-   if state.procedural then state.procedural.attackUntil=now+0.35 end
-   if state.tracks.attack then
+   if state.procedural and not bowLowered then state.procedural.attackUntil=now+0.35 end
+   if state.tracks.attack and not bowLowered then
     state.tracks.attack:Stop(0)
     state.tracks.attack:Play(.06,1,1)
    end
   end
-  if state.procedural then R6Animation.update(state.procedural,state.speed,now,dt) end
+  if state.procedural then R6Animation.update(state.procedural,state.speed,now,dt,mode) end
   state.cf=(state.cf.Position-target.Position).Magnitude>45 and target or state.cf:Lerp(target,1-math.exp(-18*dt))
   state.rig.PrimaryPart.CFrame=state.cf*CFrame.new(0,state.rig:GetAttribute("RootHeight"),0)
  end

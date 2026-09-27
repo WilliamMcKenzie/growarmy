@@ -9,10 +9,12 @@ Fresh squads contain **two Swordsmen, one Archer, and one Giant** so all three t
 | Type | Size relative to owner | Health | Damage | Attack range | Cooldown | Combat speed | Wander speed | Behaviour |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Swordsman | 0.8× | 75 | 15 | 6 | 0.75 s | 23 | 4–6 | Charge straight into melee reach |
-| Archer | 0.8× | 42 | 12 | 32 | 1.05 s | 21 | 3.8–5.7 | Advance or backpedal to stay at bow range |
+| Archer | 0.8× | 42 | 12 | 32 | 1.05 s | 21 running; stationary aiming | 3.8–5.7 | Hold at 30–32 studs, draw, shoot, or flee |
 | Giant | 1.2× | 180 | 30 | 7 | 1.6 s | 19 | 3.2–4.8 | Advance into melee with a club |
 
-Distances are studs; speeds are studs per second. Archers face their target while retreating and can attack during movement if in range and off cooldown. They are slower than Swordsmen, so a pursuing Swordsman can close the gap. Giants share the frontline melee behaviour, with their own stats and slower movement. Troops currently select the nearest living enemy.
+Distances are studs; speeds are studs per second. Archers hold position anywhere in a two-stud attack band (30–32 studs), face their target, and draw for 0.65 seconds before firing. Below 30 studs they cancel the shot, lower the bow, and run away facing their escape direction at 21 studs/second; beyond 32 they advance with the bow lowered. A new closest target restarts the draw. After firing, the 1.05-second cooldown must finish before the next draw starts. `Combat.RangeLeeway` and `Combat.DrawTime` in the Archer definition control the band and draw duration. They remain slower than Swordsmen, so pursuers can close the gap. Giants share the frontline melee behaviour with their own stats and slower movement.
+
+Every troop independently selects its nearest living hostile from all encounters currently engaged by its owner, reconsidering each server tick. Approaching another neutral adds it to the ongoing fight instead of locking the army to the first enemy; troops can split naturally across nearer opponents. Each encounter remains exclusive to one player. Winning or retreating from one encounter leaves the others active, and the player circle stays red until the last active encounter ends.
 
 Outside combat, troops independently choose world-space destinations inside the master's **18-stud radius**, walk there, and choose another point on arrival, including while the master is AFK. Sampling uses an even disk distribution within 85% of the radius to leave some room at the boundary. A destination persists until reached or until the master moves far enough that it falls outside the radius.
 
@@ -24,7 +26,7 @@ Crossing outside the radius switches a troop into return mode with a fresh desti
 
 `ArmyConfig.NeutralSpawns` controls a population of 60 individual encounters, with one randomly selected Swordsman, Archer, or Giant per spawn. Positions cover the current `Map.Field` bounds, with at least 24 studs between spawn centres, 24 studs of edge clearance, 48 studs from player characters, and enough distance from the central safe zone for idle wandering. The old fixed `Camp_*` map markers are no longer used. The current sampler assumes the flat, axis-aligned field.
 
-Unengaged troops wander around their own spawn centres. Coming within 29 studs of an available neutral starts the existing battle/capture loop. Leaving 52 studs from its spawn centre or returning to base retreats. After defeat, a replacement spawns at a new random location after 35 seconds; it never duplicates the captured troop. When no safe position is found in 80 attempts, spawning retries after 5 seconds. Retreat, army defeat, death, and disconnect release the encounter too.
+Unengaged troops wander around their own spawn centres. Coming within 29 studs of an available neutral starts or extends the battle/capture loop. Leaving 52 studs from an encounter's spawn centre releases that encounter; returning to base releases all of them. After defeat, a replacement spawns at a new random location after 35 seconds; it never duplicates the captured troop. When no safe position is found in 80 attempts, spawning retries after 5 seconds. Retreat, army defeat, death, and disconnect release the encounter too.
 
 The neutral template is constructed locally from plain white R6 parts and joints, without avatar-service requests, decals, clothing, or accessories. Class weapons remain attached so types are recognizable. R6 gets its own procedural movement/attack poses and arm grip attachments. Capture changes `OwnerId`, rebuilding the visual from the owner's R15 template while preserving class, stats, and value. Owned troop movement and catch-up speed rules are unchanged.
 
@@ -48,7 +50,8 @@ The structure separates **what a troop is**, **its changing state**, **how it ac
 | `src/server/NeutralSpawns.lua` | Random individual spawn positions, spacing/safe-zone/player clearance, and population retries |
 | `src/server/NeutralAvatar.lua` | Asset-free, completely white R6 neutral template with six body parts and no face or clothing |
 | `src/server/TroopMovement.lua` | Movement primitives and passive movement handler registry; owns wander/return state |
-| `src/server/TroopCombat.lua` | Combat handler registry, nearest-target selection, melee charge, ranged spacing, cooldowns, and damage |
+| `src/server/TroopCombat.lua` | Combat handler registry, per-troop nearest targets, melee charge, archer draw/run phases, cooldowns, and damage |
+| `src/server/BattleEncounters.lua` | Engage multiple nearby encounters, preserve player exclusivity, release distant encounters, and collect the combined hostile roster |
 | `src/server/AvatarTemplates.lua` | Publish the immediate neutral R6 template and cache full-size owned R15 appearances |
 | `src/client/TroopVisuals.client.lua` | Clone/scale templates, interpolate server markers, play movement and attack animations, and cull distant rigs |
 | `src/client/TroopWeapons.lua` | Weapon builder registry (`Sword`, `Bow`, `Club`), shared independently of troop IDs |
@@ -67,12 +70,12 @@ A catalog entry has these independent groups:
 - `Order`, `StarterCount`, `RecruitWeight`, `CampMinTier`: deterministic ordering and availability. Recruitment and neutral spawns use relative weights. `CampMinTier` remains available to tier-filtered roster callers; individual neutral spawns currently use all types.
 - `Stats`: `Health`, `Damage`, `Range`, `Cooldown`, and captured recruit `Value`.
 - `Movement`: passive `Behavior`, `CombatSpeed`, and `WanderMultiplier`.
-- `Combat`: `Behavior` (`Melee` or `Ranged` today).
+- `Combat`: `Behavior` (`Melee` or `Ranged` today), plus ranged `DrawTime` and `RangeLeeway`.
 - `Visual`: relative `Scale`, weapon builder name, effect colour/width, and animation asset IDs. These do not control damage or movement authority.
 
 Treat shared definitions as read-only. Each server unit owns `class`, `model`, `pos`, `hp`, `nextAttack`, `earned`, `owner`, `movementState`, and `combatState`. Handler-specific timers and targets belong in that unit's state table, never in the shared definition. Entering combat clears passive destinations; leaving combat clears combat state; capture resets both. Only persistent gold and starter counts are saved, not transient behaviour state.
 
-The client receives invisible markers with `Class`, `OwnerId`, `AttackSequence`, `Health`, and `MaxHealth`, plus their server-owned transforms. Attack effects use the existing `ArmyEffect` remote. Clients never choose hits or submit troop positions. Appearance templates retain the owner's body proportions; each clone applies the type's scale and scales its root-to-floor offset too. [Roblox `Model:ScaleTo`](https://create.roblox.com/docs/reference/engine/classes/Model#ScaleTo) scales rig geometry and animation joint offsets together.
+The client receives invisible markers with `Class`, `OwnerId`, `AttackSequence`, `CombatMode`, `Health`, and `MaxHealth`, plus their server-owned transforms. `CombatMode` is `Idle`, `Melee`, `Advance`, `Retreat`, `Aim`, or `Recover`; it drives both R15 animation tracks and R6 procedural poses. Ranged aim/fire poses are stopped while running or wandering. Attack effects use the existing `ArmyEffect` remote. Clients never choose hits or submit troop positions. Appearance templates retain the owner's body proportions; each clone applies the type's scale and scales its root-to-floor offset too. [Roblox `Model:ScaleTo`](https://create.roblox.com/docs/reference/engine/classes/Model#ScaleTo) scales rig geometry and animation joint offsets together.
 
 ### Adding a troop or behaviour
 
@@ -108,15 +111,15 @@ Run the troop checks with the official standalone Luau CLI (`luau` and `luau-com
 python3 tools/test_troops.py --luau /path/to/luau
 ```
 
-The runner compiles every production script, verifies Rojo source mappings, and executes unmodified definition/movement/combat modules with minimal Roblox API doubles. Checks cover catch-up speed changes, wandering, return transitions, ranged spacing/retreat, fractional range boundaries, melee pursuit, cooldowns, dead targets, save migration, neutral spawn spacing/respawn retries, blank R6 construction, and health overlay updates. They do not simulate Roblox rendering, animation, replication, or physics.
+The runner compiles every production script, verifies Rojo source mappings, and executes unmodified definition/movement/combat modules with minimal Roblox API doubles. Checks cover catch-up speed changes, wandering, return transitions, ranged spacing/retreat, fractional range boundaries, melee pursuit, cooldowns, dead targets, save migration, neutral spawn spacing/respawn retries, blank R6 construction, health overlay updates, multi-encounter targeting/exclusivity/retreat, archer draw interruption, and the two-stud attack band. They do not simulate Roblox rendering, animation, replication, or physics.
 
-Studio playtest checklist: compare all three troop sizes with the owner; verify weapons and feet stay aligned; idle and run through turns; change the player's `WalkSpeed`; die/respawn; approach neutral troops and verify melee charges, archer retreat/pursuit, and white/red circle transitions. Check that counter rows appear/disappear with owned counts and that title/HP text stays above both rig types during damage and healing. Test capture, respawning at a new location, and different player appearances in a multiplayer session.
+Studio playtest checklist: compare all three troop sizes with the owner; verify weapons and feet stay aligned; idle and run through turns; change the player's `WalkSpeed`; die/respawn; approach neutral troops and verify melee charges, archer retreat/pursuit, and white/red circle transitions. Engage an Archer, then approach another neutral and verify troops split by proximity while both encounters remain active. Check bow lowering during retreat and stationary drawing anywhere in the 30–32-stud band. Check that counter rows appear/disappear with owned counts and that title/HP text stays above both rig types during damage and healing. Test capture, respawning at a new location, and different player appearances in a multiplayer session.
 
 ## Gameplay and limits
 
 With enemies enabled, up to 60 individual neutral troops spawn across the field. Approach one to auto-battle; defeated troops join your army. Return to the barracks to bank captured recruits, train a permanent Swordsman, or roll a permanent troop (60% Swordsman, 30% Archer, 10% Giant). The economy HUD/prompts remain hidden; the troop counters and overhead health UI are visible.
 
-The field cap is 60; the permanent starter cap is 12. Only captured troops have cash-in value. Retreat resets the active neutral encounter. Losing the army or resetting the character loses field troops while keeping banked gold and starter upgrades. Each neutral encounter engages one player at a time; there is no PvP.
+The field cap is 60; the permanent starter cap is 12. Only captured troops have cash-in value. Retreat resets each encounter that is left behind; returning to base releases every active encounter. Losing the army or resetting the character loses field troops while keeping banked gold and starter upgrades. Each neutral encounter engages one player at a time; there is no PvP.
 
 Studio progress is session-only. Published servers use DataStore storage, without production-grade cross-server session locking. Units use flat direct movement, with no obstacle pathfinding, collision avoidance, or line of sight. The server updates around 10 Hz and has not been load-tested for large multiplayer sessions.
 

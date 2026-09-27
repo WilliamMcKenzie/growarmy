@@ -126,6 +126,9 @@
       "TroopCombat": {
         "$path": "src/server/TroopCombat.lua"
       },
+      "BattleEncounters": {
+        "$path": "src/server/BattleEncounters.lua"
+      },
       "NeutralSpawns": {
         "$path": "src/server/NeutralSpawns.lua"
       },

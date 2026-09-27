@@ -5,6 +5,7 @@ local DataStoreService = game:GetService("DataStoreService")
 local C = require(RS:WaitForChild("ArmyConfig"))
 local Movement = require(script.Parent:WaitForChild("TroopMovement"))
 local Combat = require(script.Parent:WaitForChild("TroopCombat"))
+local Battles = require(script.Parent:WaitForChild("BattleEncounters"))
 local NeutralSpawns = require(script.Parent:WaitForChild("NeutralSpawns"))
 local field = workspace:WaitForChild("Map"):WaitForChild("Field")
 local remote = Instance.new("RemoteEvent", RS)
@@ -44,6 +45,7 @@ local function createUnit(class, pos, owner, earned)
  model.PrimaryPart=marker
  model:SetAttribute("Class",class)
  model:SetAttribute("AttackSequence",0)
+ model:SetAttribute("CombatMode","Idle")
  model:SetAttribute("Health",C.Classes[class].Stats.Health)
  model:SetAttribute("MaxHealth",C.Classes[class].Stats.Health)
  local u={class=class,model=model,pos=pos,hp=C.Classes[class].Stats.Health,nextAttack=0,earned=earned or 0,owner=owner,movementState={},combatState={}}
@@ -178,55 +180,47 @@ RunService.Heartbeat:Connect(function(dt)
   local r=root(player)
   local humanoid=player.Character and player.Character:FindFirstChildOfClass("Humanoid")
   if not r or not humanoid or humanoid.Health<=0 then continue end
-  local active=nil
-  for _,encounter in ipairs(encounters) do if encounter.owner==player then active=encounter;break end end
-  if active and ((flat(r.Position-active.pos)).Magnitude>C.NeutralSpawns.RetreatDistance or atBase(player)) then
-   spawnEncounter(active);active=nil;announce(player,"Retreated — the neutral troop has reset.")
-  end
-  if not active and not atBase(player) and #p.units>0 then
-   local best=C.NeutralSpawns.EngageDistance
-   for _,encounter in ipairs(encounters) do
-    if not encounter.owner and not encounter.respawn and #encounter.units>0 then
-     local d=flat(r.Position-encounter.units[1].pos).Magnitude
-     if d<best then active=encounter;best=d end
-    end
-   end
-   if active then active.owner=player end
-  end
-  player:SetAttribute("InBattle",active~=nil)
-  if active then
-   Combat.update(p.units,active.units,now,dt,emitEffect)
-   Combat.update(active.units,p.units,now,dt,emitEffect)
+  local active,enemies,retreated=Battles.update(player,r.Position,not atBase(player) and #p.units>0,encounters,spawnEncounter)
+  if retreated then announce(player,"Retreated — distant neutral troops have reset.") end
+  player:SetAttribute("InBattle",#enemies>0)
+  if #enemies>0 then
+   -- Every troop chooses its own nearest opponent across all of this player's encounters.
+   Combat.update(p.units,enemies,now,dt,emitEffect)
+   Combat.update(enemies,p.units,now,dt,emitEffect)
    for i=#p.units,1,-1 do
     local u=p.units[i]
     if u.hp<=0 then u.model:Destroy();table.remove(p.units,i) end
    end
-   for i=#active.units,1,-1 do
-    local u=active.units[i]
-    if u.hp<=0 then
-     table.remove(active.units,i)
-     if #p.units<C.ArmyCap and #p.units>0 then
-      u.hp=C.Classes[u.class].Stats.Health;u.owner=player;u.earned=C.Classes[u.class].Stats.Value;u.nextAttack=now+0.6
-      Movement.reset(u);u.combatState={}
-      paint(u,player);table.insert(p.units,u)
-     else u.model:Destroy() end
-    end
-   end
    if #p.units==0 then
-    spawnEncounter(active)
-    player:SetAttribute("InBattle",false)
+    release(player)
     r.CFrame=CFrame.new(0,5,12)
     equip(player);announce(player,"Army lost! Banked gold and starter upgrades are safe.")
-   elseif #active.units==0 then
-    active.owner=nil;active.respawn=now+C.NeutralSpawns.RespawnDelay
-    player:SetAttribute("InBattle",false)
-    announce(player,"Troop recruited! Bank your recruits or push farther.")
+   else
+    local remaining,recruited=0,0
+    for _,encounter in ipairs(active) do
+     for i=#encounter.units,1,-1 do
+      local u=encounter.units[i]
+      if u.hp<=0 then
+       table.remove(encounter.units,i)
+       if #p.units<C.ArmyCap then
+        u.hp=C.Classes[u.class].Stats.Health;u.owner=player;u.earned=C.Classes[u.class].Stats.Value;u.nextAttack=now+0.6
+        Movement.reset(u);Combat.reset(u)
+        paint(u,player);table.insert(p.units,u);recruited+=1
+       else u.model:Destroy() end
+      end
+     end
+     if #encounter.units==0 then
+      encounter.owner=nil;encounter.respawn=now+C.NeutralSpawns.RespawnDelay
+     else remaining+=1 end
+    end
+    player:SetAttribute("InBattle",remaining>0)
+    if recruited>0 then announce(player,"Recruited "..recruited.." troop(s)! Bank them or push farther.") end
    end
   else
    local healing=atBase(player)
    local movementContext={center=r.Position,walkSpeed=humanoid.WalkSpeed}
    for _,u in ipairs(p.units) do
-    u.combatState={}
+    Combat.reset(u)
     Movement.update(u,movementContext,dt)
     if healing then u.hp=C.Classes[u.class].Stats.Health end
    end

@@ -45,6 +45,7 @@ def main():
         ("ArmyConfig", "src/shared/ArmyConfig.lua"),
         ("TroopMovement", "src/server/TroopMovement.lua"),
         ("TroopCombat", "src/server/TroopCombat.lua"),
+        ("BattleEncounters", "src/server/BattleEncounters.lua"),
         ("TroopWeapons", "src/client/TroopWeapons.lua"),
         ("NeutralSpawns", "src/server/NeutralSpawns.lua"),
         ("NeutralAvatar", "src/server/NeutralAvatar.lua"),

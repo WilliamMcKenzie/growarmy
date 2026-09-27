@@ -18,7 +18,7 @@ return {
   Order = 2, StarterCount = 1, RecruitWeight = 30, CampMinTier = 1,
   Stats = {Health = 42, Damage = 12, Range = 32, Cooldown = 1.05, Value = 22},
   Movement = {Behavior = "Wander", CombatSpeed = 21, WanderMultiplier = 0.95},
-  Combat = {Behavior = "Ranged"},
+  Combat = {Behavior = "Ranged", DrawTime = 0.65, RangeLeeway = 2},
   Visual = {
    Scale = 0.8, Weapon = "Bow", Color = Color3.fromRGB(112, 228, 149),
    Animations = {Idle = 507766666, Walk = 507777826, Hold = 4713633512, Attack = 4713811763},
