@@ -19,13 +19,13 @@ def part(name, position, size, class_name='Part', visible=False):
 
 field = part('Field', [0,-1,0], [600,2,600], visible=True)
 field['Properties'].update({'Color':[136/255,210/255,65/255], 'TopSurface':'Smooth'})
-for x in range(6):
-    for z in range(6):
+for x in range(24):
+    for z in range(24):
         color = [136/255,210/255,65/255] if (x+z)%2 == 0 else [131/255,204/255,68/255]
-        tile = part(f'Grass_{x}_{z}',[-250+x*100,0.01,-250+z*100],[100,0.02,100],visible=True)
+        tile = part(f'Grass_{x}_{z}',[-287.5+x*25,0.01,-287.5+z*25],[25,0.02,25],visible=True)
         tile['Properties'].update({'Color':color,'TopSurface':'Smooth','CanCollide':False,'CastShadow':False})
         tile['Children'] = [{'Name':'Studs','ClassName':'Texture','Properties':{
-            'Face':'Top','Texture':'rbxassetid://10455712361','StudsPerTileU':4,'StudsPerTileV':4,'OffsetStudsU':(x*100)%4,'OffsetStudsV':(z*100)%4,
+            'Face':'Top','Texture':'rbxassetid://10455712361','StudsPerTileU':4,'StudsPerTileV':4,'OffsetStudsU':(x*25)%4,'OffsetStudsV':(z*25)%4,
             'Color3':color,'Transparency':0.05}}]
 ocean = part('Ocean', [0,-3.5,0], [2048,1,2048], visible=True)
 ocean['Properties'].update({'Color':[0,210/255,225/255], 'Material':'Neon', 'TopSurface':'Smooth', 'CanCollide':False, 'CastShadow':False})
