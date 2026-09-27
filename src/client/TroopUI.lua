@@ -3,8 +3,8 @@ local C = require(RS:WaitForChild("ArmyConfig"))
 local Weapons = require(script.Parent:WaitForChild("TroopWeapons"))
 local UI = {}
 
-function UI.text(parent, name, size)
- local label = Instance.new("TextLabel")
+function UI.text(parent, name, size, className)
+ local label = Instance.new(className or "TextLabel")
  label.Name = name
  label.BackgroundTransparency = 1
  label.BorderSizePixel = 0
@@ -50,13 +50,13 @@ function UI.weaponIcon(parent, weaponName)
  return viewport
 end
 
-function UI.createTag(rig, class)
+function UI.createTag(rig, class, tier)
  local head = rig:FindFirstChild("Head")
  if not head then return nil end
  local tag = Instance.new("BillboardGui")
  tag.Name = "TroopNameplate"
  tag.Adornee = head
- tag.Size = UDim2.fromOffset(160, 70)
+ tag.Size = UDim2.fromOffset(190, 70)
  tag.SizeOffset = Vector2.new(0, 0.5)
  tag.StudsOffsetWorldSpace = Vector3.new(0, head.Size.Y / 2 + 0.3, 0)
  tag.ClipsDescendants = false
@@ -67,7 +67,7 @@ function UI.createTag(rig, class)
  local title = UI.text(tag, "Title", 23)
  title.Size = UDim2.new(1, 0, 0, 30)
  title.Position = UDim2.fromOffset(0, 3)
- title.Text = C.Classes[class].DisplayName or class
+ title.Text = (C.Classes[class].DisplayName or class) .. " · T" .. (tier or 1)
  local bar = Instance.new("Frame")
  bar.Name = "HealthBar"
  bar.AnchorPoint = Vector2.new(0.5, 0.5)

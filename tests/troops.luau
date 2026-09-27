@@ -11,10 +11,10 @@ end
 local function unit(class,x,z)
  local attrs={AttackSequence=0}
  return {
-  class=class,pos=Vector3.new(x or 0,0.3,z or 0),hp=C.Classes[class].Stats.Health,
+  class=class,tier=1,pos=Vector3.new(x or 0,0.3,z or 0),hp=C.Classes[class].Stats.Health,
   nextAttack=0,movementState={},combatState={},
   model={PrimaryPart={},GetAttribute=function(_,key) return attrs[key] end,
-   SetAttribute=function(_,key,value) attrs[key]=value end},
+   SetAttribute=function(_,key,value) attrs[key]=value end,Destroy=function(self) self.destroyed=true end},
  }
 end
 local function fight(u,target,now,dt)
@@ -33,7 +33,9 @@ test("catalog handlers and weapons resolve; sizes and speed ordering",function()
  close(C.Classes.Archer.Visual.Scale,0.8)
  close(C.Classes.Giant.Visual.Scale,1.2)
  assert(C.Classes.Swordsman.Movement.CombatSpeed>C.Classes.Archer.Movement.CombatSpeed)
- assert(C.Classes.Archer.Movement.CombatSpeed>C.Classes.Giant.Movement.CombatSpeed)
+ close(C.Classes.Archer.Movement.CombatSpeed,10.5)
+ close(C.Classes.Archer.Movement.WanderMultiplier,0.475)
+ close(C.Classes.Archer.Movement.ReturnSpeedMultiplier,0.5)
 end)
 test("fresh mixed starter and legacy recruit migration",function()
  local fresh=C.restoreStarter(nil)
@@ -56,13 +58,13 @@ test("weighted recruitment boundaries and camp eligibility",function()
  local random=Random.new(123)
  for _=1,1000 do assert(C.rollClass(random,1)~="Giant") end
 end)
-test("every type matches changing master speeds while returning",function()
+test("return speeds follow the live master speed with the Archer slowdown",function()
  for _,class in ipairs(C.Order) do
   local u=unit(class,100)
   for _,speed in ipairs({23,11,35,0}) do
    local before=u.pos
    Movement.update(u,{center=Vector3.new(0,8,0),walkSpeed=speed},0.1)
-   close((u.pos-before).Magnitude,speed*0.1)
+   close((u.pos-before).Magnitude,speed*0.1*(class=="Archer" and 0.5 or 1))
    close(u.pos.Y,0.3)
    assert(u.movementState.returning)
   end
@@ -129,7 +131,7 @@ end)
 test("archer retreats at running speed without aiming or firing",function()
  local u,target=unit("Archer"),unit("Giant",10)
  fight(u,target)
- close(u.pos.X,-2.1)
+ close(u.pos.X,-1.05)
  close(target.hp,180)
  assert(u.model:GetAttribute("CombatMode")=="Retreat")
  assert(u.model.PrimaryPart.CFrame.Target.X<u.pos.X)
@@ -152,12 +154,12 @@ end)
 test("archer approaches distant targets before drawing at exact range",function()
  local u,target=unit("Archer"),unit("Giant",40)
  fight(u,target)
- close(u.pos.X,2.1)
+ close(u.pos.X,1.05)
  assert(u.model:GetAttribute("CombatMode")=="Advance")
- for i=2,4 do fight(u,target,i*0.1) end
+ for i=2,8 do fight(u,target,i*0.1) end
  close((target.pos-u.pos).Magnitude,32)
  close(target.hp,180)
- for i=5,12 do fight(u,target,i*0.1) end
+ for i=9,16 do fight(u,target,i*0.1) end
  close(target.hp,168)
  close((target.pos-u.pos).Magnitude,32)
 end)
@@ -183,7 +185,7 @@ end)
 test("archer handles overlapping targets and sub-stud range corrections",function()
  local u,target=unit("Archer"),unit("Giant")
  fight(u,target)
- close(u.pos.X,2.1)
+ close(u.pos.X,1.05)
  u.pos=Vector3.new(-32.05,0.3,0)
  fight(u,target,0.1)
  close((target.pos-u.pos).Magnitude,32)
@@ -377,5 +379,100 @@ test("health overlay follows replicated damage, healing, and empty health",funct
  attrs.Health=-10
  modules.TroopUI.updateTag(tag,marker)
  assert(tag.health.Text=="0 / 75");close(tag.fill.Size.X,0)
+end)
+local Tiers=modules.TroopTiers
+local Merge=modules.TroopMerge
+local function owned(class,tier,owner)
+ local troop=unit(class)
+ troop.tier=tier;troop.owner=owner;troop.earned=0
+ troop.hp=Tiers.stats(class,tier).Health
+ return troop
+end
+test("tier scaling improves health and damage and grows by 1.2 each rank",function()
+ for _,class in ipairs(C.Order) do
+  for tier=2,Tiers.MaxTier do
+   local previous,current=Tiers.stats(class,tier-1),Tiers.stats(class,tier)
+   assert(current.Health>previous.Health and current.Damage>previous.Damage)
+   close(Tiers.scale(class,tier)/Tiers.scale(class,tier-1),1.2)
+   close(current.Range,previous.Range);close(current.Cooldown,previous.Cooldown)
+  end
+ end
+ close(Tiers.scale("Swordsman",3),1.152)
+ close(Tiers.scale("Giant",3),1.728)
+end)
+test("merge consumes exactly two owned matches and preserves injury and cash value",function()
+ local owner={}
+ local first,second,other=owned("Swordsman",1,owner),owned("Swordsman",1,owner),owned("Archer",1,owner)
+ first.hp=75;second.hp=37.5
+ first.earned=0;second.earned=12
+ first.nextAttack=4;second.nextAttack=7
+ first.combatState={aimTarget=other};first.movementState={returning=true}
+ local units={first,other,second}
+ local merged=Merge.apply(units,owner,"Swordsman",1,1)
+ assert(merged==first and #units==2 and units[2]==other)
+ assert(first.tier==2 and second.model.destroyed and second.hp==0)
+ close(first.hp,Tiers.stats("Swordsman",2).Health*0.75)
+ close(first.earned,12);close(first.nextAttack,7)
+ assert(first.combatState.aimTarget==nil and first.movementState.returning==nil)
+ assert(first.model:GetAttribute("Tier")==2 and first.model:GetAttribute("CombatMode")=="Idle")
+ close(first.model:GetAttribute("MaxHealth"),165)
+ close(first.model:GetAttribute("Health"),first.hp)
+end)
+test("four tier-one troops merge through two ranks without minting gold",function()
+ local owner={}
+ local units={}
+ for _=1,4 do table.insert(units,owned("Swordsman",1,owner)) end
+ assert(Merge.apply(units,owner,"Swordsman",1,0))
+ assert(Merge.apply(units,owner,"Swordsman",1,0))
+ assert(Merge.apply(units,owner,"Swordsman",2,0))
+ assert(#units==1 and units[1].tier==3 and units[1].earned==0)
+ close(units[1].hp,Tiers.stats("Swordsman",3).Health)
+end)
+test("merge rejects mismatches, dead troops, foreign owners, and invalid tier requests",function()
+ local owner,other={},{}
+ local first=owned("Swordsman",1,owner)
+ local dead=owned("Swordsman",1,owner);dead.hp=0
+ local units={first,owned("Swordsman",1,other),owned("Archer",1,owner),owned("Swordsman",2,owner),dead}
+ assert(not Merge.apply(units,owner,"Swordsman",1,0))
+ assert(not Merge.apply(units,owner,"Archer",1,0))
+ for _,tier in ipairs({0,-1,1.5,4,math.huge,0/0,"1",{}}) do
+  assert(not Merge.apply(units,owner,"Swordsman",tier,0))
+ end
+ assert(not Merge.apply(units,owner,"Unknown",1,0))
+ assert(not Merge.apply(units,owner,{},1,0))
+ assert(not Merge.apply(units,owner,"Swordsman",nil,0))
+ assert(#units==5 and first.tier==1 and not first.model.destroyed)
+end)
+test("top tier is capped and increasing MaxTier enables the next merge",function()
+ local owner={}
+ local units={owned("Giant",3,owner),owned("Giant",3,owner)}
+ assert(not Merge.apply(units,owner,"Giant",3,0))
+ local previousCap=Tiers.MaxTier
+ Tiers.MaxTier=4
+ local merged=Merge.apply(units,owner,"Giant",3,0)
+ assert(merged and merged.tier==4 and #units==1)
+ close(Tiers.scale("Giant",4)/Tiers.scale("Giant",3),1.2)
+ assert(merged.hp>Tiers.stats("Giant",3).Health)
+ Tiers.MaxTier=previousCap
+end)
+test("tiered melee and archer attacks use improved damage with unchanged behaviours",function()
+ for _,class in ipairs({"Swordsman","Archer"}) do
+  local troop=owned(class,2,{})
+  local enemy=unit("Giant",class=="Archer" and 31 or 5)
+  fight(troop,enemy,0)
+  if class=="Archer" then
+   assert(troop.model:GetAttribute("CombatMode")=="Aim")
+   close(enemy.hp,180)
+   fight(troop,enemy,0.7)
+  end
+  close(enemy.hp,180-Tiers.stats(class,2).Damage)
+ end
+end)
+test("Archer wandering is half its previous speed at every tier",function()
+ for tier=1,Tiers.MaxTier do
+  local troop=owned("Archer",tier,{})
+  Movement.update(troop,{center=Vector3.new(0,0.3,0),walkSpeed=23},0.1)
+  assert(troop.movementState.speed>=1.9 and troop.movementState.speed<=2.85)
+ end
 end)
 print("Passed "..passed.." troop tests")

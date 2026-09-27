@@ -3,6 +3,8 @@ local RS = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local DataStoreService = game:GetService("DataStoreService")
 local C = require(RS:WaitForChild("ArmyConfig"))
+local Tiers = require(RS:WaitForChild("TroopTiers"))
+local Merge = require(script.Parent:WaitForChild("TroopMerge"))
 local Movement = require(script.Parent:WaitForChild("TroopMovement"))
 local Combat = require(script.Parent:WaitForChild("TroopCombat"))
 local Battles = require(script.Parent:WaitForChild("BattleEncounters"))
@@ -31,11 +33,13 @@ local function paint(u, friendly)
 end
 local function syncHealth(units)
  for _,u in ipairs(units) do
-  local health=math.clamp(u.hp,0,C.Classes[u.class].Stats.Health)
+  local health=math.clamp(u.hp,0,Tiers.stats(u.class,u.tier).Health)
   if u.model:GetAttribute("Health")~=health then u.model:SetAttribute("Health",health) end
  end
 end
-local function createUnit(class, pos, owner, earned)
+local function createUnit(class, pos, owner, earned, tier)
+ tier=tier or 1
+ local stats=Tiers.stats(class,tier)
  uid += 1
  local model = Instance.new("Model")
  model.Name = class.."_"..uid
@@ -44,11 +48,12 @@ local function createUnit(class, pos, owner, earned)
  marker.Anchored=true;marker.CanCollide=false;marker.CanTouch=false;marker.CanQuery=false
  model.PrimaryPart=marker
  model:SetAttribute("Class",class)
+ model:SetAttribute("Tier",tier)
  model:SetAttribute("AttackSequence",0)
  model:SetAttribute("CombatMode","Idle")
- model:SetAttribute("Health",C.Classes[class].Stats.Health)
- model:SetAttribute("MaxHealth",C.Classes[class].Stats.Health)
- local u={class=class,model=model,pos=pos,hp=C.Classes[class].Stats.Health,nextAttack=0,earned=earned or 0,owner=owner,movementState={},combatState={}}
+ model:SetAttribute("Health",stats.Health)
+ model:SetAttribute("MaxHealth",stats.Health)
+ local u={class=class,tier=tier,model=model,pos=pos,hp=stats.Health,nextAttack=0,earned=earned or 0,owner=owner,movementState={},combatState={}}
  paint(u,owner);Movement.place(u,pos);model.Parent=troops
  return u
 end
@@ -73,8 +78,10 @@ local function sync(player)
  player:SetAttribute("RollCost",C.rollCost(p.starter))
  for _,class in ipairs(C.Order) do
   local n=0
-  for _,u in ipairs(p.units) do if u.class==class then n+=1 end end
+  local tierCounts=table.create(Tiers.MaxTier,0)
+  for _,u in ipairs(p.units) do if u.class==class then n+=1;tierCounts[u.tier]+=1 end end
   player:SetAttribute(class,n)
+  for tier=1,Tiers.MaxTier do player:SetAttribute(Tiers.countAttribute(class,tier),tierCounts[tier]) end
   player:SetAttribute("Starter"..class,p.starter[class])
  end
 end
@@ -127,8 +134,18 @@ local function release(player)
  end
  player:SetAttribute("InBattle",false)
 end
-local function action(player,verb)
+local function action(player,verb,class,tier)
  local p=profiles[player]
+ if verb=="Merge" then
+  local humanoid=player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+  if not p or not root(player) or not humanoid or humanoid.Health<=0 or os.clock()-(p.lastMerge or -math.huge)<0.3 then return end
+  p.lastMerge=os.clock()
+  local merged,message=Merge.apply(p.units,player,class,tier,os.clock())
+  if not merged then remote:FireClient(player,"MergeResult",message);return end
+  sync(player)
+  remote:FireClient(player,"MergeResult",(C.Classes[class].DisplayName or class).." merged to Tier "..merged.tier.."!")
+  return
+ end
  if not p or not atBase(player) or os.clock()-(p.lastAction or 0)<0.5 then return end
  p.lastAction=os.clock()
  if verb=="CashIn" then
@@ -154,7 +171,7 @@ local function action(player,verb)
  sync(player)
  task.spawn(save,player)
 end
-remote.OnServerEvent:Connect(function(player,verb) if typeof(verb)=="string" then action(player,verb) end end)
+remote.OnServerEvent:Connect(function(player,verb,class,tier) if typeof(verb)=="string" then action(player,verb,class,tier) end end)
 for _,verb in ipairs({"CashIn","Upgrade","Recruit"}) do
  workspace.Map[verb].Prompt.Triggered:Connect(function(player) action(player,verb) end)
 end
@@ -203,7 +220,8 @@ RunService.Heartbeat:Connect(function(dt)
       if u.hp<=0 then
        table.remove(encounter.units,i)
        if #p.units<C.ArmyCap then
-        u.hp=C.Classes[u.class].Stats.Health;u.owner=player;u.earned=C.Classes[u.class].Stats.Value;u.nextAttack=now+0.6
+        local stats=Tiers.stats(u.class,u.tier)
+        u.hp=stats.Health;u.owner=player;u.earned=stats.Value;u.nextAttack=now+0.6
         Movement.reset(u);Combat.reset(u)
         paint(u,player);table.insert(p.units,u);recruited+=1
        else u.model:Destroy() end
@@ -222,7 +240,7 @@ RunService.Heartbeat:Connect(function(dt)
    for _,u in ipairs(p.units) do
     Combat.reset(u)
     Movement.update(u,movementContext,dt)
-    if healing then u.hp=C.Classes[u.class].Stats.Health end
+    if healing then u.hp=Tiers.stats(u.class,u.tier).Health end
    end
   end
   sync(player)

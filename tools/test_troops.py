@@ -42,9 +42,11 @@ def main():
     bundle = [(root / "tests/roblox_doubles.luau").read_text()]
     for name, path in (
         ("TroopDefinitions", "src/shared/TroopDefinitions.lua"),
+        ("TroopTiers", "src/shared/TroopTiers.lua"),
         ("ArmyConfig", "src/shared/ArmyConfig.lua"),
         ("TroopMovement", "src/server/TroopMovement.lua"),
         ("TroopCombat", "src/server/TroopCombat.lua"),
+        ("TroopMerge", "src/server/TroopMerge.lua"),
         ("BattleEncounters", "src/server/BattleEncounters.lua"),
         ("TroopWeapons", "src/client/TroopWeapons.lua"),
         ("NeutralSpawns", "src/server/NeutralSpawns.lua"),

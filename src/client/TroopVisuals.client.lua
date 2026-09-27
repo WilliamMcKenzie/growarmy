@@ -1,6 +1,7 @@
 local RS = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local C = require(RS:WaitForChild("ArmyConfig"))
+local Tiers = require(RS:WaitForChild("TroopTiers"))
 local Weapons = require(script.Parent:WaitForChild("TroopWeapons"))
 local R6Animation = require(script.Parent:WaitForChild("R6TroopAnimation"))
 local UI = require(script.Parent:WaitForChild("TroopUI"))
@@ -36,11 +37,13 @@ local function create(marker,template)
  local rig=template:Clone()
  rig.Name=marker.Name
  local class=marker:GetAttribute("Class")
+ local tier=marker:GetAttribute("Tier") or 1
  local ranged=C.Classes[class].Combat.Behavior=="Ranged"
  local appearance=C.Classes[class].Visual
  Weapons.attach(rig,appearance.Weapon)
- rig:ScaleTo(rig:GetScale()*appearance.Scale)
- rig:SetAttribute("RootHeight",template:GetAttribute("RootHeight")*appearance.Scale)
+ local scale=Tiers.scale(class,tier)
+ rig:ScaleTo(rig:GetScale()*scale)
+ rig:SetAttribute("RootHeight",template:GetAttribute("RootHeight")*scale)
  rig.Parent=visuals
  local tracks,procedural={},nil
  if rig:GetAttribute("RigType")=="R6" then
@@ -58,9 +61,9 @@ local function create(marker,template)
  if tracks.hold and (not ranged or marker:GetAttribute("CombatMode")=="Aim") then tracks.hold:Play(.15) end
  local cf=marker.PrimaryPart.CFrame
  rig.PrimaryPart.CFrame=cf*CFrame.new(0,rig:GetAttribute("RootHeight"),0)
- local tag=UI.createTag(rig,class)
+ local tag=UI.createTag(rig,class,tier)
  UI.updateTag(tag,marker)
- return {rig=rig,template=template,class=class,ranged=ranged,owner=marker:GetAttribute("OwnerId"),tracks=tracks,procedural=procedural,tag=tag,cf=cf,lastTarget=cf.Position,lastSample=os.clock(),speed=0,attack=marker:GetAttribute("AttackSequence")}
+ return {rig=rig,template=template,class=class,tier=tier,ranged=ranged,owner=marker:GetAttribute("OwnerId"),tracks=tracks,procedural=procedural,tag=tag,cf=cf,lastTarget=cf.Position,lastSample=os.clock(),speed=0,attack=marker:GetAttribute("AttackSequence")}
 end
 RunService.RenderStepped:Connect(function(dt)
  local camera=workspace.CurrentCamera
@@ -79,7 +82,7 @@ RunService.RenderStepped:Connect(function(dt)
   local owner=marker:GetAttribute("OwnerId")
   local template=owner==0 and templates:FindFirstChild("Neutral") or templates:FindFirstChild(tostring(owner))
   template=template or templates:FindFirstChild("Default") or templates:FindFirstChild("Neutral")
-  if state and (state.owner~=owner or state.template~=template or state.class~=marker:GetAttribute("Class")) then dispose(state);states[marker]=nil;state=nil end
+  if state and (state.owner~=owner or state.template~=template or state.class~=marker:GetAttribute("Class") or state.tier~=(marker:GetAttribute("Tier") or 1)) then dispose(state);states[marker]=nil;state=nil end
   if not state and template and built<3 then
    state=create(marker,template);states[marker]=state;built+=1
   end

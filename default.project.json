@@ -111,6 +111,9 @@
       },
       "TroopDefinitions": {
         "$path": "src/shared/TroopDefinitions.lua"
+      },
+      "TroopTiers": {
+        "$path": "src/shared/TroopTiers.lua"
       }
     },
     "ServerScriptService": {
@@ -125,6 +128,9 @@
       },
       "TroopCombat": {
         "$path": "src/server/TroopCombat.lua"
+      },
+      "TroopMerge": {
+        "$path": "src/server/TroopMerge.lua"
       },
       "BattleEncounters": {
         "$path": "src/server/BattleEncounters.lua"

@@ -17,7 +17,7 @@ return {
   DisplayName = "Archer",
   Order = 2, StarterCount = 1, RecruitWeight = 30, CampMinTier = 1,
   Stats = {Health = 42, Damage = 12, Range = 32, Cooldown = 1.05, Value = 22},
-  Movement = {Behavior = "Wander", CombatSpeed = 21, WanderMultiplier = 0.95},
+  Movement = {Behavior = "Wander", CombatSpeed = 10.5, WanderMultiplier = 0.475, ReturnSpeedMultiplier = 0.5},
   Combat = {Behavior = "Ranged", DrawTime = 0.65, RangeLeeway = 2},
   Visual = {
    Scale = 0.8, Weapon = "Bow", Color = Color3.fromRGB(112, 228, 149),

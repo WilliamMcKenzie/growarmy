@@ -46,8 +46,8 @@ function Movement.Behaviors.Wander(unit, context, dt)
  if not state.target or flat(state.target - center).Magnitude > C.Roaming.Radius then
   pickTarget(unit, center, state)
  end
- -- All classes match the current master WalkSpeed; class penalties apply only to wandering/combat.
- Movement.stepToward(unit, state.target, dt, state.returning and context.walkSpeed or state.speed)
+ local returnSpeed = context.walkSpeed * (C.Classes[unit.class].Movement.ReturnSpeedMultiplier or 1)
+ Movement.stepToward(unit, state.target, dt, state.returning and returnSpeed or state.speed)
 end
 
 function Movement.update(unit, context, dt)

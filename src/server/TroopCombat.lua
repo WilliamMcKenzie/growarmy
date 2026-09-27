@@ -1,4 +1,5 @@
 local C = require(game:GetService("ReplicatedStorage"):WaitForChild("ArmyConfig"))
+local Tiers = require(game:GetService("ReplicatedStorage"):WaitForChild("TroopTiers"))
 local Movement = require(script.Parent:WaitForChild("TroopMovement"))
 local Combat = {}
 local function flat(v) return Vector3.new(v.X, 0, v.Z) end
@@ -41,34 +42,36 @@ function Combat.Behaviors.Melee(unit, enemies, now, dt, emitEffect)
  if not target then Combat.reset(unit); return end
  setMode(unit, "Melee")
  local def = C.Classes[unit.class]
- if distance > def.Stats.Range then
+ local stats = Tiers.stats(unit.class, unit.tier)
+ if distance > stats.Range then
   local direction = flat(target.pos - unit.pos).Unit
   -- Charge directly to melee reach, without running through the target on a long tick.
-  local destination = target.pos - direction * def.Stats.Range
+  local destination = target.pos - direction * stats.Range
   Movement.stepToward(unit, destination, dt, def.Movement.CombatSpeed, target.pos)
  else
   Movement.place(unit, unit.pos, target.pos)
  end
- attack(unit, target, def.Stats, now, emitEffect)
+ attack(unit, target, stats, now, emitEffect)
 end
 
 function Combat.Behaviors.Ranged(unit, enemies, now, dt, emitEffect)
  local target, distance = nearest(unit, enemies)
  if not target then Combat.reset(unit); return end
  local def = C.Classes[unit.class]
+ local stats = Tiers.stats(unit.class, unit.tier)
  local state, settings = unit.combatState, def.Combat
  local away = flat(unit.pos - target.pos)
  -- Coincident spawns still need a finite escape direction.
  local direction = away.Magnitude > 0.001 and away.Unit or Vector3.new(1, 0, 0)
- local destination = target.pos + direction * def.Stats.Range
+ local destination = target.pos + direction * stats.Range
  -- Hold anywhere in the attack band instead of correcting every small distance change.
- if distance < def.Stats.Range - settings.RangeLeeway then
+ if distance < stats.Range - settings.RangeLeeway then
   state.aimTarget = nil; state.aimStarted = nil
   setMode(unit, "Retreat")
   Movement.stepToward(unit, destination, dt, def.Movement.CombatSpeed)
   return
  end
- if distance > def.Stats.Range + 0.001 then
+ if distance > stats.Range + 0.001 then
   state.aimTarget = nil; state.aimStarted = nil
   setMode(unit, "Advance")
   Movement.stepToward(unit, destination, dt, def.Movement.CombatSpeed)
@@ -87,7 +90,7 @@ function Combat.Behaviors.Ranged(unit, enemies, now, dt, emitEffect)
  setMode(unit, "Aim")
  Movement.place(unit, unit.pos, target.pos)
  if now - state.aimStarted >= settings.DrawTime then
-  attack(unit, target, def.Stats, now, emitEffect)
+  attack(unit, target, stats, now, emitEffect)
   state.aimTarget = nil; state.aimStarted = nil
   setMode(unit, "Recover")
  end
