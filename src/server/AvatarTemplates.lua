@@ -5,11 +5,16 @@ local Templates = Instance.new("Folder")
 Templates.Name = "ArmyAvatars"
 Templates.Parent = RS
 local AvatarTemplates = {}
+local NeutralAvatar = require(script.Parent:WaitForChild("NeutralAvatar"))
+-- Available immediately, even when Roblox's avatar service is unavailable.
+local neutral = NeutralAvatar.build()
+neutral.Parent = Templates
 
 local function build(description, name, ownerScale)
  -- Keep the owner's actual body proportions; type-specific scaling happens on the client.
  local model = Players:CreateHumanoidModelFromDescriptionAsync(description, Enum.HumanoidRigType.R15)
  model.Name = name
+ model:SetAttribute("RigType", "R15")
  local humanoid = model:FindFirstChildOfClass("Humanoid")
  local root = model:FindFirstChild("HumanoidRootPart")
  model.PrimaryPart = root

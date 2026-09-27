@@ -1,5 +1,16 @@
 local Config = {}
-Config.SpawnEnemies = false
+Config.SpawnEnemies = true
+Config.NeutralSpawns = {
+	Population = 60,
+	EdgeMargin = 24,
+	MinSpacing = 24,
+	PlayerClearance = 48,
+	Attempts = 80,
+	RespawnDelay = 35,
+	RetryDelay = 5,
+	EngageDistance = 29,
+	RetreatDistance = 52,
+}
 Config.SafeRadius = 36
 Config.ArmyCap = 60
 Config.StarterCap = 12

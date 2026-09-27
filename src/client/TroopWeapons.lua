@@ -34,6 +34,9 @@ function Weapons.attach(rig, name)
  if not name then return end
  local builder=assert(Weapons.Builders[name],"Unknown weapon: "..name)
  local hand=rig:FindFirstChild(builder.Hand)
+ if not hand and rig:GetAttribute("RigType")=="R6" then
+  hand=rig:FindFirstChild(builder.Hand=="LeftHand" and "Left Arm" or "Right Arm")
+ end
  if not hand then return end
  local grip=hand:FindFirstChild(builder.Grip)
  local base=hand.CFrame*(grip and grip.CFrame or CFrame.new())

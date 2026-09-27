@@ -184,4 +184,95 @@ test("combat discards wandering destination and ignores dead targets",function()
  fight(u,alive,1)
  close((u.pos-before).Magnitude,0)
 end)
+test("neutral population is scattered across the field, clear of base and players",function()
+ local Spawns=modules.NeutralSpawns
+ local field={Position=Vector3.new(0,-1,0),Size=Vector3.new(600,2,600)}
+ local random=Random.new(421)
+ local encounters={}
+ local players={Vector3.new(100,0.3,100),Vector3.new(-100,0.3,-100)}
+ local quadrants={}
+ for _=1,C.NeutralSpawns.Population do
+  local encounter={units={}}
+  table.insert(encounters,encounter)
+  assert(Spawns.populate(encounter,random,field,encounters,players,0,function(class,pos)
+   local troop=unit(class,pos.X,pos.Z)
+   assert(troop.owner==nil)
+   return troop
+  end))
+  assert(#encounter.units==1 and encounter.respawn==nil)
+  local pos=encounter.pos
+  close(pos.Y,0.3)
+  assert(math.abs(pos.X)<=276 and math.abs(pos.Z)<=276)
+  assert(Vector3.new(pos.X,0,pos.Z).Magnitude>=C.SafeRadius+C.Roaming.Radius+6)
+  quadrants[(pos.X>0 and "east" or "west")..(pos.Z>0 and "north" or "south")]=true
+  for _,other in ipairs(encounters) do
+   if other~=encounter then assert((other.pos-pos).Magnitude>=C.NeutralSpawns.MinSpacing) end
+  end
+  for _,player in ipairs(players) do assert((player-pos).Magnitude>=C.NeutralSpawns.PlayerClearance) end
+ end
+ local count=0
+ for _ in pairs(quadrants) do count+=1 end
+ assert(count==4)
+end)
+test("blocked neutral spawns retry without producing an unsafe troop",function()
+ local encounter={units={}}
+ local field={Position=Vector3.new(0,-1,0),Size=Vector3.new(40,2,40)}
+ local created=0
+ assert(not modules.NeutralSpawns.populate(encounter,Random.new(),field,{encounter},{},10,function()
+  created+=1
+ end))
+ assert(created==0 and #encounter.units==0)
+ assert(encounter.respawn==10+C.NeutralSpawns.RetryDelay)
+end)
+test("neutral respawn uses a fresh position and resets its deadline",function()
+ local encounter={units={},pos=Vector3.new(100,0.3,100),respawn=35}
+ local field={Position=Vector3.new(0,-1,0),Size=Vector3.new(600,2,600)}
+ local previous=encounter.pos
+ assert(modules.NeutralSpawns.populate(encounter,Random.new(),field,{encounter},{previous},35,function(class,pos)
+  return unit(class,pos.X,pos.Z)
+ end))
+ assert((encounter.pos-previous).Magnitude>=C.NeutralSpawns.PlayerClearance)
+ assert(encounter.respawn==nil and #encounter.units==1)
+end)
+test("blank neutral template has six white body parts, no face or clothes, and grounded R6 joints",function()
+ local rig=modules.NeutralAvatar.build()
+ assert(rig:GetAttribute("RigType")=="R6")
+ assert(rig.PrimaryPart.Name=="HumanoidRootPart" and rig.PrimaryPart.Anchored)
+ local parts,joints=0,0
+ for _,object in ipairs(rig:GetDescendants()) do
+  assert(object.ClassName~="Decal" and object.ClassName~="Texture" and object.ClassName~="Shirt")
+  assert(object.ClassName~="Pants" and object.ClassName~="Accessory")
+  if object:IsA("BasePart") and object~=rig.PrimaryPart then
+   parts+=1
+   assert(object.Color[1]==1 and object.Color[2]==1 and object.Color[3]==1)
+   assert(not object.CanCollide and not object.CanQuery)
+  elseif object:IsA("Motor6D") then
+   joints+=1
+   assert(object.Part0 and object.Part1)
+   local from=object.Part0.CFrame.Position+object.C0.Position
+   local to=object.Part1.CFrame.Position+object.C1.Position
+   close((from-to).Magnitude,0)
+  end
+ end
+ assert(parts==6 and joints==6)
+ local leg=rig:FindFirstChild("Left Leg")
+ close(leg.CFrame.Position.Y-leg.Size.Y/2,0)
+ close(rig.PrimaryPart.CFrame.Position.Y,rig:GetAttribute("RootHeight"))
+end)
+test("health overlay follows replicated damage, healing, and empty health",function()
+ local attrs={Health=75,MaxHealth=75}
+ local marker={GetAttribute=function(_,key) return attrs[key] end}
+ local tag={fill={},health={}}
+ modules.TroopUI.updateTag(tag,marker)
+ assert(tag.health.Text=="75 / 75");close(tag.fill.Size.X,1)
+ attrs.Health=30
+ modules.TroopUI.updateTag(tag,marker)
+ assert(tag.health.Text=="30 / 75");close(tag.fill.Size.X,0.4)
+ attrs.Health=75
+ modules.TroopUI.updateTag(tag,marker)
+ close(tag.fill.Size.X,1)
+ attrs.Health=-10
+ modules.TroopUI.updateTag(tag,marker)
+ assert(tag.health.Text=="0 / 75");close(tag.fill.Size.X,0)
+end)
 print("Passed "..passed.." troop tests")

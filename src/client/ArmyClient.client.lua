@@ -6,7 +6,7 @@ local Debris=game:GetService("Debris")
 local player=Players.LocalPlayer
 local C=require(RS:WaitForChild("ArmyConfig"))
 local effect=RS:WaitForChild("ArmyEffect")
--- No game HUD while testing movement and troop visuals.
+-- Keep the legacy economy HUD hidden; TroopHUD owns the live troop counters.
 local old=player:WaitForChild("PlayerGui"):FindFirstChild("ArmyHUD")
 if old then old:Destroy() end
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All,false)

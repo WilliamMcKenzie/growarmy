@@ -46,6 +46,9 @@ def main():
         ("TroopMovement", "src/server/TroopMovement.lua"),
         ("TroopCombat", "src/server/TroopCombat.lua"),
         ("TroopWeapons", "src/client/TroopWeapons.lua"),
+        ("NeutralSpawns", "src/server/NeutralSpawns.lua"),
+        ("NeutralAvatar", "src/server/NeutralAvatar.lua"),
+        ("TroopUI", "src/client/TroopUI.lua"),
     ):
         bundle.append(f'modules["{name}"] = (function()\n{(root / path).read_text()}\nend)()')
     bundle.append((root / "tests/troops.luau").read_text())

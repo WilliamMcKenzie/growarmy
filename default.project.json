@@ -125,6 +125,12 @@
       },
       "TroopCombat": {
         "$path": "src/server/TroopCombat.lua"
+      },
+      "NeutralSpawns": {
+        "$path": "src/server/NeutralSpawns.lua"
+      },
+      "NeutralAvatar": {
+        "$path": "src/server/NeutralAvatar.lua"
       }
     },
     "StarterPlayer": {
@@ -144,6 +150,15 @@
         },
         "TroopRadius": {
           "$path": "src/client/TroopRadius.client.lua"
+        },
+        "R6TroopAnimation": {
+          "$path": "src/client/R6TroopAnimation.lua"
+        },
+        "TroopUI": {
+          "$path": "src/client/TroopUI.lua"
+        },
+        "TroopHUD": {
+          "$path": "src/client/TroopHUD.client.lua"
         }
       }
     }

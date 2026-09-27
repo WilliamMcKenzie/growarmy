@@ -5,13 +5,15 @@ local DataStoreService = game:GetService("DataStoreService")
 local C = require(RS:WaitForChild("ArmyConfig"))
 local Movement = require(script.Parent:WaitForChild("TroopMovement"))
 local Combat = require(script.Parent:WaitForChild("TroopCombat"))
+local NeutralSpawns = require(script.Parent:WaitForChild("NeutralSpawns"))
+local field = workspace:WaitForChild("Map"):WaitForChild("Field")
 local remote = Instance.new("RemoteEvent", RS)
 remote.Name = "ArmyAction"
 local fx = Instance.new("RemoteEvent", RS)
 fx.Name = "ArmyEffect"
 local troops = Instance.new("Folder", workspace)
 troops.Name = "Troops"
-local profiles, camps = {}, {}
+local profiles, encounters = {}, {}
 local store = not RunService:IsStudio() and DataStoreService:GetDataStore("GrowArmyPrototype_v1") or nil
 local uid = 0
 local Avatars = require(script.Parent:WaitForChild("AvatarTemplates"))
@@ -26,6 +28,12 @@ end
 local function paint(u, friendly)
  u.model:SetAttribute("OwnerId", friendly and friendly.UserId or 0)
 end
+local function syncHealth(units)
+ for _,u in ipairs(units) do
+  local health=math.clamp(u.hp,0,C.Classes[u.class].Stats.Health)
+  if u.model:GetAttribute("Health")~=health then u.model:SetAttribute("Health",health) end
+ end
+end
 local function createUnit(class, pos, owner, earned)
  uid += 1
  local model = Instance.new("Model")
@@ -36,6 +44,8 @@ local function createUnit(class, pos, owner, earned)
  model.PrimaryPart=marker
  model:SetAttribute("Class",class)
  model:SetAttribute("AttackSequence",0)
+ model:SetAttribute("Health",C.Classes[class].Stats.Health)
+ model:SetAttribute("MaxHealth",C.Classes[class].Stats.Health)
  local u={class=class,model=model,pos=pos,hp=C.Classes[class].Stats.Health,nextAttack=0,earned=earned or 0,owner=owner,movementState={},combatState={}}
  paint(u,owner);Movement.place(u,pos);model.Parent=troops
  return u
@@ -89,41 +99,31 @@ local function save(player)
  if not ok then warn("Army progress save failed: "..tostring(err)); player:SetAttribute("SaveMode","Save failed • retrying")
  else player:SetAttribute("SaveMode","Progress saves") end
 end
-local function spawnCamp(camp)
- clear(camp.units)
- camp.owner=nil
- for i,class in ipairs(camp.roster) do
-  local pos=camp.pos+Vector3.new(((i-1)%4-1.5)*3,0,math.floor((i-1)/4)*3)
-  table.insert(camp.units,createUnit(class,pos))
+local function playerPositions()
+ local positions={}
+ for _,player in ipairs(Players:GetPlayers()) do
+  local r=root(player)
+  if r then table.insert(positions,r.Position) end
  end
- camp.respawn=nil
+ return positions
+end
+local function spawnEncounter(encounter)
+ clear(encounter.units)
+ encounter.owner=nil
+ NeutralSpawns.populate(encounter,rosterRandom,field,encounters,playerPositions(),os.clock(),createUnit)
 end
 if C.SpawnEnemies then
-for _,p in ipairs(workspace.Map:GetChildren()) do
- local ring,index = p.Name:match("^Camp_(%d+)_(%d+)$")
- if ring then
-  ring,index=tonumber(ring),tonumber(index)
-  local roster={}
-  local n=ring==1 and 3 or ring==2 and 7 or 12
-  for i=1,n do
-   roster[i]=C.rollClass(rosterRandom,ring)
-  end
-  local camp={pos=Vector3.new(p.Position.X,0.3,p.Position.Z),roster=roster,units={},ring=ring}
-  table.insert(camps,camp)
-  local board=Instance.new("BillboardGui",p)
-  board.Size=UDim2.fromOffset(180,46);board.StudsOffset=Vector3.new(0,9,0);board.AlwaysOnTop=true;board.MaxDistance=110
-  local text=Instance.new("TextLabel",board)
-  text.Size=UDim2.fromScale(1,1);text.BackgroundColor3=Color3.fromRGB(30,35,40);text.BackgroundTransparency=0.2
-  text.TextColor3=Color3.fromRGB(255,228,173);text.Font=Enum.Font.GothamBold;text.TextSize=14
-  camp.label=text
-  spawnCamp(camp)
+ for _=1,C.NeutralSpawns.Population do
+  local encounter={units={}}
+  table.insert(encounters,encounter)
+  spawnEncounter(encounter)
  end
-end
 end
 local function release(player)
- for _,camp in ipairs(camps) do
-  if camp.owner==player then spawnCamp(camp) end
+ for _,encounter in ipairs(encounters) do
+  if encounter.owner==player then spawnEncounter(encounter) end
  end
+ player:SetAttribute("InBattle",false)
 end
 local function action(player,verb)
  local p=profiles[player]
@@ -131,7 +131,7 @@ local function action(player,verb)
  p.lastAction=os.clock()
  if verb=="CashIn" then
   local amount=value(p)
-  if amount==0 then announce(player,"Defeat a camp first — recruited troops are worth gold.");return end
+  if amount==0 then announce(player,"Defeat a neutral troop first — recruited troops are worth gold.");return end
   p.gold+=amount
   release(player)
   equip(player)
@@ -166,24 +166,30 @@ RunService.Heartbeat:Connect(function(dt)
  if elapsed<0.1 then return end
  dt=math.min(elapsed,0.25);elapsed=0
  local now=os.clock()
- for _,camp in ipairs(camps) do
-  if camp.respawn and now>=camp.respawn then spawnCamp(camp) end
-  camp.label.Text=camp.respawn and ("REFORMING • "..math.ceil(camp.respawn-now).."s") or ("TIER "..camp.ring.." • "..#camp.units.." TROOPS")
+ for _,encounter in ipairs(encounters) do
+  if encounter.respawn and now>=encounter.respawn then spawnEncounter(encounter) end
+  if not encounter.owner and not encounter.respawn then
+   for _,u in ipairs(encounter.units) do
+    Movement.update(u,{center=encounter.pos,walkSpeed=C.Classes[u.class].Movement.CombatSpeed},dt)
+   end
+  end
  end
  for player,p in pairs(profiles) do
   local r=root(player)
   local humanoid=player.Character and player.Character:FindFirstChildOfClass("Humanoid")
   if not r or not humanoid or humanoid.Health<=0 then continue end
   local active=nil
-  for _,camp in ipairs(camps) do if camp.owner==player then active=camp;break end end
-  if active and ((flat(r.Position-active.pos)).Magnitude>52 or atBase(player)) then
-   spawnCamp(active);active=nil;announce(player,"Retreated — that camp has regrouped.")
+  for _,encounter in ipairs(encounters) do if encounter.owner==player then active=encounter;break end end
+  if active and ((flat(r.Position-active.pos)).Magnitude>C.NeutralSpawns.RetreatDistance or atBase(player)) then
+   spawnEncounter(active);active=nil;announce(player,"Retreated — the neutral troop has reset.")
   end
   if not active and not atBase(player) and #p.units>0 then
-   local best=29
-   for _,camp in ipairs(camps) do
-    local d=flat(r.Position-camp.pos).Magnitude
-    if not camp.owner and not camp.respawn and d<best then active=camp;best=d end
+   local best=C.NeutralSpawns.EngageDistance
+   for _,encounter in ipairs(encounters) do
+    if not encounter.owner and not encounter.respawn and #encounter.units>0 then
+     local d=flat(r.Position-encounter.units[1].pos).Magnitude
+     if d<best then active=encounter;best=d end
+    end
    end
    if active then active.owner=player end
   end
@@ -207,12 +213,14 @@ RunService.Heartbeat:Connect(function(dt)
     end
    end
    if #p.units==0 then
-    spawnCamp(active)
+    spawnEncounter(active)
+    player:SetAttribute("InBattle",false)
     r.CFrame=CFrame.new(0,5,12)
     equip(player);announce(player,"Army lost! Banked gold and starter upgrades are safe.")
    elseif #active.units==0 then
-    active.owner=nil;active.respawn=now+35
-    announce(player,"Camp captured! Recruits joined your army — bank them or push farther.")
+    active.owner=nil;active.respawn=now+C.NeutralSpawns.RespawnDelay
+    player:SetAttribute("InBattle",false)
+    announce(player,"Troop recruited! Bank your recruits or push farther.")
    end
   else
    local healing=atBase(player)
@@ -225,6 +233,9 @@ RunService.Heartbeat:Connect(function(dt)
   end
   sync(player)
  end
+ -- Publish after all combat/capture/healing, so every behaviour uses the same health channel.
+ for _,p in pairs(profiles) do syncHealth(p.units) end
+ for _,encounter in ipairs(encounters) do syncHealth(encounter.units) end
 end)
 local function joined(player)
  local data=nil
@@ -272,4 +283,4 @@ game:BindToClose(function()
   task.wait(0.1)
  until os.clock()>deadline
 end)
-print("Grow an Army ready: "..#camps.." camps, "..#C.Order.." classes, server-authoritative PvE.")
+print("Grow an Army ready: "..#encounters.." encounters, "..#C.Order.." classes, server-authoritative PvE.")
