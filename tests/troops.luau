@@ -475,4 +475,75 @@ test("Archer wandering is half its previous speed at every tier",function()
   assert(troop.movementState.speed>=1.9 and troop.movementState.speed<=2.85)
  end
 end)
+test("drag merge upgrades the exact destination and consumes only the selected source",function()
+ local owner={}
+ local untouched,source,target=owned("Swordsman",1,owner),owned("Swordsman",1,owner),owned("Swordsman",1,owner)
+ source.hp=30;target.hp=60;source.earned=12;target.earned=24
+ local units={untouched,source,target}
+ local result=Merge.applyPair(units,owner,source.model,target.model,2)
+ assert(result==target and #units==2 and units[1]==untouched and units[2]==target)
+ assert(untouched.tier==1 and target.tier==2 and source.model.destroyed)
+ close(target.hp,Tiers.stats("Swordsman",2).Health*0.6)
+ close(target.earned,36)
+ assert(not Merge.applyPair(units,owner,source.model,untouched.model,3))
+ assert(#units==2 and untouched.tier==1)
+end)
+test("drag merge rejects forged, dead, foreign, mismatched, self, and maximum-tier targets",function()
+ local owner,other={},{}
+ local source,target=owned("Swordsman",1,owner),owned("Swordsman",1,owner)
+ local foreign=owned("Swordsman",1,other)
+ local archer=owned("Archer",1,owner)
+ local higher=owned("Swordsman",2,owner)
+ local dead=owned("Swordsman",1,owner);dead.hp=0
+ local topA,topB=owned("Giant",Tiers.MaxTier,owner),owned("Giant",Tiers.MaxTier,owner)
+ local units={source,target,foreign,archer,higher,dead,topA,topB}
+ for _,model in ipairs({{},"Swordsman",2,source.model,foreign.model,archer.model,higher.model,dead.model}) do
+  assert(not Merge.applyPair(units,owner,source.model,model,0))
+ end
+ assert(not Merge.applyPair(units,owner,nil,target.model,0))
+ assert(not Merge.applyPair(units,owner,topA.model,topB.model,0))
+ assert(#units==8 and source.tier==1 and target.tier==1)
+end)
+test("inventory wraps after eight icons and grows upward",function()
+ local Layout=modules.TroopInventoryLayout
+ local eight=Layout.metrics(8,600,500)
+ assert(eight.rows==1)
+ local x1,y1=Layout.position(1,eight)
+ local x8,y8=Layout.position(8,eight)
+ close(y1,y8);assert(x8>x1)
+ local nine=Layout.metrics(9,600,500)
+ local x9,y9=Layout.position(9,nine)
+ local firstX,firstY=Layout.position(1,nine)
+ close(x9,firstX);assert(y9<firstY and nine.rows==2)
+ local seventeen=Layout.metrics(17,600,500)
+ local _,top=Layout.position(17,seventeen)
+ local _,middle=Layout.position(9,seventeen)
+ local _,bottom=Layout.position(1,seventeen)
+ assert(top<middle and middle<bottom and seventeen.rows==3)
+end)
+test("inventory has no row cap and scrolls instead of hiding large rosters",function()
+ local Layout=modules.TroopInventoryLayout
+ local empty=Layout.metrics(0,350,200)
+ assert(empty.rows==0 and empty.contentHeight==0)
+ local metrics=Layout.metrics(4097,350,200)
+ assert(metrics.rows==513 and metrics.width<=350 and metrics.viewHeight<=200)
+ assert(metrics.contentHeight>metrics.viewHeight)
+ local occupied={}
+ for index=1,4097 do
+  local x,y=Layout.position(index,metrics)
+  assert(x>=0 and x+metrics.cell<=metrics.width)
+  assert(y>=0 and y+metrics.cell<=metrics.contentHeight)
+  local key=tostring(x)..":"..tostring(y)
+  assert(not occupied[key]);occupied[key]=true
+ end
+end)
+test("inventory highlights only matching non-max-tier pairs",function()
+ local Layout=modules.TroopInventoryLayout
+ local a={class="Archer",tier=1}
+ assert(Layout.canMerge(a,{class="Archer",tier=1},Tiers.MaxTier))
+ assert(not Layout.canMerge(a,a,Tiers.MaxTier))
+ assert(not Layout.canMerge(a,{class="Archer",tier=2},Tiers.MaxTier))
+ assert(not Layout.canMerge(a,{class="Swordsman",tier=1},Tiers.MaxTier))
+ assert(not Layout.canMerge({class="Archer",tier=3},{class="Archer",tier=3},3))
+end)
 print("Passed "..passed.." troop tests")

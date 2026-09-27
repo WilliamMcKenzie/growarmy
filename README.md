@@ -1,6 +1,6 @@
 # Grow an Army — prototype
 
-A Roblox PvE army prototype. Move with standard desktop/mobile controls; your troops wander around you and follow when left behind. Scattered neutral PvE troops are enabled by default. The troop counter HUD is visible; legacy economy controls/prompts and CoreGui remain hidden. Restart Play after syncing script changes.
+A Roblox PvE army prototype. Move with standard desktop/mobile controls; your troops wander around you and follow when left behind. Scattered neutral PvE troops are enabled by default. The troop inventory is visible; legacy economy controls/prompts and CoreGui remain hidden. Restart Play after syncing script changes.
 
 Fresh squads contain **two Swordsmen, one Archer, and one Giant** so all three types are visible immediately. Owned troops wear their owner's cached avatar appearance. Unowned troops use a completely white, faceless R6 body with no clothes or accessories, plus their class weapon. There are no individual troop circles. A thin white circle around the local player shows the navigation radius and turns red when the server sets `InBattle`.
 
@@ -24,7 +24,7 @@ Crossing outside the radius switches a troop into return mode with a fresh desti
 
 ## Merging and tiers
 
-Use the **Merge → T2/T3** buttons under a troop type in the left HUD. Two living troops of the same class and tier become one troop of the next tier, freeing one field slot. Merging is optional, free, and available anywhere, including during combat. Rows only show tiers you own, and merge buttons only appear when you have two eligible troops below the cap. The server checks ownership and live counts again for every request and rate-limits requests; clients never choose the resulting stats.
+Drag one troop icon onto another matching icon in the bottom-centre inventory. Two living troops of the same class and tier become one troop of the next tier, freeing one field slot. Merging is optional, free, and available anywhere, including during combat. Matching targets highlight green; incompatible hovered targets highlight red. The server validates the exact source/destination marker instances against the player's live roster, rejects stale/foreign/self/mismatched/max-tier pairs, and rate-limits requests. It never substitutes another pair or trusts client stats.
 
 There are three tiers initially. `src/shared/TroopTiers.lua` owns all progression rules independently of behaviour definitions:
 
@@ -36,11 +36,11 @@ There are three tiers initially. `src/shared/TroopTiers.lua` owns all progressio
 
 Health and damage are rounded to the nearest integer after scaling the base stat. Attack range, cooldown, draw duration, targeting, and movement rules do not change by tier. Combat, healing, capture, replication, and visuals all resolve stats/scales through `TroopTiers`; handlers should use `Tiers.stats(unit.class, unit.tier)` rather than the class's base `Stats` directly.
 
-The surviving troop keeps its position. Its health percentage is the average of the pair's health percentages, applied to its new maximum; merging injured troops is not a full heal. It retains the later attack cooldown, clears pending targeting/wander state, and inherits the sum of the pair's earned cash-in values. Starter troops still contribute zero cash value. The consumed troop is removed once, and ownership/tier changes rebuild the client rig from the original template so size never compounds accidentally.
+The drop-target troop survives and keeps its position; the dragged source is consumed. Its health percentage is the average of the pair's health percentages, applied to its new maximum; merging injured troops is not a full heal. It retains the later attack cooldown, clears pending targeting/wander state, and inherits the sum of the pair's earned cash-in values. Starter troops still contribute zero cash value. The consumed troop is removed once, and ownership/tier changes rebuild the client rig from the original template so size never compounds accidentally.
 
 Merges apply to the **current field army**. As with other field troops, they reset on army loss, character reset, cash-in/re-equipping, or rejoining; permanent starter counts are unchanged and equip Tier 1 troops. Saved gold/starter formats remain compatible. Neutrals currently spawn at Tier 1; if higher-tier neutrals are added later, their capture value uses the configured `Value` multiplier (2× per tier), while merging always preserves existing earned value.
 
-To add Tier 4 and beyond, change `TroopTiers.MaxTier`; the formulas, server validation, tier counts, HUD buttons, and nameplates all extend automatically. `SizeMultiplier` is 1.2 and `StatMultipliers` controls stat growth. Tune those at source and restart Play; resolved stat tables are cached and read-only during a session. `CampMinTier` is legacy encounter-difficulty filtering and is unrelated to unit progression tiers.
+To add Tier 4 and beyond, change `TroopTiers.MaxTier`; the formulas, server validation, tier counts, inventory matching, and nameplates all extend automatically. `SizeMultiplier` is 1.2 and `StatMultipliers` controls stat growth. Tune those at source and restart Play; resolved stat tables are cached and read-only during a session. `CampMinTier` is legacy encounter-difficulty filtering and is unrelated to unit progression tiers.
 
 ## Neutral PvE population
 
@@ -50,9 +50,13 @@ Unengaged troops wander around their own spawn centres. Coming within 29 studs o
 
 The neutral template is constructed locally from plain white R6 parts and joints, without avatar-service requests, decals, clothing, or accessories. Class weapons remain attached so types are recognizable. R6 gets its own procedural movement/attack poses and arm grip attachments. Capture changes `OwnerId`, rebuilding the visual from the owner's R15 template while preserving class, stats, and value. All newly spawned or equipped troops start at Tier 1.
 
-## Troop counters and nameplates
+## Troop inventory and nameplates
 
-The left-side HUD shows a rendered sword, bow, or club icon with `xN` for each type currently owned, plus a count for each owned tier and a merge button when a matching pair is available. Rows with zero troops are hidden and the remaining rows close the gap. Counts come from server-owned player attributes, so recruitment, losses, and respawning update the HUD without counting visual clones.
+The custom inventory shows one rendered weapon icon for each living owned troop, with no count rows or merge buttons. It sits at the bottom centre, fills eight columns left-to-right, then adds the ninth icon on a new row above. More rows continue upward with no inventory row cap. The panel scrolls vertically after reaching 45% of the available screen height; the gameplay army cap remains a separate rule. Slot sizes adapt to the screen width.
+
+Tier borders are pale grey, blue, and gold for Tiers 1–3, with generated colours for future tiers. Mouse users drag icons directly; touch users hold for 0.18 seconds to start dragging, while quick swipes scroll. Dragging near the panel edges automatically scrolls to other rows. Invalid drops restore the icon. Escape, focus loss, screen resizing, and roster changes cancel an active drag.
+
+Inventory entries follow replicated troop markers (ownership, class, tier, health, and lifetime), not culled visual clones or aggregate counts. Stable spawn ordering keeps icons from constantly reshuffling. Recruitment adds an icon, loss removes it, and a successful merge updates the selected destination while removing the source. Server responses appear as brief Fredoka One notices above the inventory.
 
 Both owned and neutral troops have a title and tier above their heads (for example `Sword · T2`, `Archer · T1`, or `Giant · T3`) and a thin 8-pixel health bar underneath. Larger 25-pixel `current / maximum` health text sits over the centre of the bar. The bar changes from green to amber to red as health falls. All new text uses [Fredoka One](https://create.roblox.com/docs/reference/engine/datatypes/Font) and a custom black `UIStroke` with a 4-pixel thickness. Nameplates use a bottom anchor to stay above the head at different zoom levels and disappear beyond 140 studs.
 
@@ -80,7 +84,8 @@ The structure separates **what a troop is**, **its changing state**, **how it ac
 | `src/client/TroopRadius.client.lua` | Local player navigation circle and combat colour |
 | `src/client/ArmyClient.client.lua` | Camera, hidden legacy economy HUD setup, and transient attack effects |
 | `src/client/R6TroopAnimation.lua` | Procedural R6 walking, aiming, and melee poses; owned R15 rigs retain their asset animations |
-| `src/client/TroopHUD.client.lua` | Left-side weapon/count rows, visible only for currently owned troop types |
+| `src/client/TroopHUD.client.lua` | Individual troop inventory, roster tracking, mouse/touch dragging, matching feedback, and scrolling |
+| `src/client/TroopInventoryLayout.lua` | Eight-column upward layout, responsive dimensions, and merge compatibility |
 | `src/client/TroopUI.lua` | Shared Fredoka One/4 px text style, weapon icons, and title/health nameplates |
 | `default.project.json` | Explicit Rojo mapping for every script/module |
 
@@ -101,7 +106,7 @@ The client receives invisible markers with `Class`, `Tier`, `OwnerId`, `AttackSe
 
 ### Adding a troop or behaviour
 
-1. Add a stable ID to `TroopDefinitions.lua` by copying the nearest existing definition. Give it a unique `Order`, its own stats/visuals, and normally `StarterCount = 0`. Use an existing movement, combat, and weapon handler where possible. Catalog ordering, counter rows, titles, recruitment, neutral spawns, and fresh/save-loaded starter tables discover it automatically. Guaranteed training via the `Upgrade` action intentionally remains a Swordsman rule.
+1. Add a stable ID to `TroopDefinitions.lua` by copying the nearest existing definition. Give it a unique `Order`, its own stats/visuals, and normally `StarterCount = 0`. Use an existing movement, combat, and weapon handler where possible. Catalog ordering, inventory icons, titles, recruitment, neutral spawns, and fresh/save-loaded starter tables discover it automatically. Guaranteed training via the `Upgrade` action intentionally remains a Swordsman rule.
 2. For new passive behaviour, add `Movement.Behaviors.Name(unit, context, dt)` and select it in the definition. Context supplies the master's `center` and live `walkSpeed`; use `Movement.stepToward`/`place` to keep the marker and state position synchronized. Keep temporary state in `unit.movementState`.
 3. For new combat behaviour (for example a healer or flanker), add `Combat.Behaviors.Name(unit, enemies, now, dt, emitEffect)` and select it in the definition. It owns target selection and positioning, and must enforce its range, cooldown, damage/support rules, and `AttackSequence` updates. Use `unit.combatState` for persistent combat decisions. Handlers run once per server tick and must not yield. If a future behaviour needs allies or navigation queries, extend the handler context explicitly; do not reach into profile internals or make the client authoritative.
 4. For a new weapon, add a named entry to `Weapons.Builders` with `Hand`, `Grip`, and `Build(piece)`. Animation IDs are definition data; new animation combinations do not require new class branches. Extend the effect renderer if a new effect needs more than the current beam width/colour.
@@ -133,13 +138,13 @@ Run the troop checks with the official standalone Luau CLI (`luau` and `luau-com
 python3 tools/test_troops.py --luau /path/to/luau
 ```
 
-The runner compiles every production script, verifies Rojo source mappings, and executes unmodified definition/movement/combat modules with minimal Roblox API doubles. Checks cover catch-up speed changes, wandering, return transitions, ranged spacing/retreat, fractional range boundaries, melee pursuit, cooldowns, dead targets, save migration, neutral spawn spacing/respawn retries, blank R6 construction, health overlay updates, multi-encounter targeting/exclusivity/retreat, archer draw interruption, the two-stud attack band, tier scaling, invalid/foreign merge rejection, cash-value/health preservation, tiered damage, and extending the tier cap. They do not simulate Roblox rendering, animation, replication, or physics.
+The runner compiles every production script, verifies Rojo source mappings, and executes unmodified definition/movement/combat modules with minimal Roblox API doubles. Checks cover catch-up speed changes, wandering, return transitions, ranged spacing/retreat, fractional range boundaries, melee pursuit, cooldowns, dead targets, save migration, neutral spawn spacing/respawn retries, blank R6 construction, health overlay updates, multi-encounter targeting/exclusivity/retreat, archer draw interruption, the two-stud attack band, tier scaling, invalid/foreign merge rejection, cash-value/health preservation, tiered damage, extending the tier cap, exact drag-pair validation, upward wrapping at 8/9/16/17 icons, and a 4,097-icon uncapped layout. They do not simulate Roblox rendering, animation, replication, or physics.
 
-Studio playtest checklist: compare all three troop sizes with the owner; verify weapons and feet stay aligned; idle and run through turns; change the player's `WalkSpeed`; die/respawn; approach neutral troops and verify melee charges, archer retreat/pursuit, and white/red circle transitions. Engage an Archer, then approach another neutral and verify troops split by proximity while both encounters remain active. Check bow lowering during retreat and stationary drawing anywhere in the 30–32-stud band. Check that counter rows appear/disappear with owned counts and that title/HP text stays above both rig types during damage and healing. Test capture, respawning at a new location, different player appearances in a multiplayer session, and merging through Tiers 2/3 while both idle and fighting. Verify the enlarged body, weapons, grounded feet, health text, and tier counts on desktop and touch controls.
+Studio playtest checklist: compare all three troop sizes with the owner; verify weapons and feet stay aligned; idle and run through turns; change the player's `WalkSpeed`; die/respawn; approach neutral troops and verify melee charges, archer retreat/pursuit, and white/red circle transitions. Engage an Archer, then approach another neutral and verify troops split by proximity while both encounters remain active. Check bow lowering during retreat and stationary drawing anywhere in the 30–32-stud band. Check that inventory icons appear/disappear with owned troops and that title/HP text stays above both rig types during damage and healing. Test capture, respawning at a new location, different player appearances in a multiplayer session, and merging through Tiers 2/3 while both idle and fighting. Verify the enlarged body, weapons, grounded feet, health text, and inventory icons on desktop and touch controls. Drag specific injured matching troops to verify selection, reject invalid/max-tier pairs, add a ninth/seventeenth icon to check upward wrapping, scroll/auto-scroll through a large roster, and confirm loss/capture/resize during a drag cancels it cleanly.
 
 ## Gameplay and limits
 
-With enemies enabled, up to 60 individual neutral troops spawn across the field. Approach one to auto-battle; defeated troops join your army. Return to the barracks to bank captured recruits, train a permanent Swordsman, or roll a permanent troop (60% Swordsman, 30% Archer, 10% Giant). The economy HUD/prompts remain hidden; the troop counters and overhead health UI are visible.
+With enemies enabled, up to 60 individual neutral troops spawn across the field. Approach one to auto-battle; defeated troops join your army. Return to the barracks to bank captured recruits, train a permanent Swordsman, or roll a permanent troop (60% Swordsman, 30% Archer, 10% Giant). The economy HUD/prompts remain hidden; the troop inventory and overhead health UI are visible.
 
 The field cap is 60; the permanent starter cap is 12. Only captured troops have cash-in value. Retreat resets each encounter that is left behind; returning to base releases every active encounter. Losing the army or resetting the character loses field troops while keeping banked gold and starter upgrades. Each neutral encounter engages one player at a time; there is no PvP.
 

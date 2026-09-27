@@ -134,16 +134,16 @@ local function release(player)
  end
  player:SetAttribute("InBattle",false)
 end
-local function action(player,verb,class,tier)
+local function action(player,verb,sourceModel,targetModel)
  local p=profiles[player]
  if verb=="Merge" then
   local humanoid=player.Character and player.Character:FindFirstChildOfClass("Humanoid")
   if not p or not root(player) or not humanoid or humanoid.Health<=0 or os.clock()-(p.lastMerge or -math.huge)<0.3 then return end
   p.lastMerge=os.clock()
-  local merged,message=Merge.apply(p.units,player,class,tier,os.clock())
+  local merged,message=Merge.applyPair(p.units,player,sourceModel,targetModel,os.clock())
   if not merged then remote:FireClient(player,"MergeResult",message);return end
   sync(player)
-  remote:FireClient(player,"MergeResult",(C.Classes[class].DisplayName or class).." merged to Tier "..merged.tier.."!")
+  remote:FireClient(player,"MergeResult",(C.Classes[merged.class].DisplayName or merged.class).." merged to Tier "..merged.tier.."!")
   return
  end
  if not p or not atBase(player) or os.clock()-(p.lastAction or 0)<0.5 then return end
@@ -171,7 +171,7 @@ local function action(player,verb,class,tier)
  sync(player)
  task.spawn(save,player)
 end
-remote.OnServerEvent:Connect(function(player,verb,class,tier) if typeof(verb)=="string" then action(player,verb,class,tier) end end)
+remote.OnServerEvent:Connect(function(player,verb,sourceModel,targetModel) if typeof(verb)=="string" then action(player,verb,sourceModel,targetModel) end end)
 for _,verb in ipairs({"CashIn","Upgrade","Recruit"}) do
  workspace.Map[verb].Prompt.Triggered:Connect(function(player) action(player,verb) end)
 end

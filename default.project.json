@@ -168,6 +168,9 @@
         },
         "TroopHUD": {
           "$path": "src/client/TroopHUD.client.lua"
+        },
+        "TroopInventoryLayout": {
+          "$path": "src/client/TroopInventoryLayout.lua"
         }
       }
     }
