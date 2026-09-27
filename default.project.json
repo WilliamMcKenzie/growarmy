@@ -12,40 +12,91 @@
     },
     "Lighting": {
       "$properties": {
-        "ClockTime": 14,
-        "Brightness": 2,
+        "ClockTime": 16,
+        "Brightness": 2.5,
         "Ambient": [
-          0.6,
-          0.75,
-          0.8
+          0.12,
+          0.29,
+          0.48
         ],
         "OutdoorAmbient": [
-          0.65,
-          0.8,
-          0.85
+          0.26,
+          0.48,
+          0.66
         ],
         "EnvironmentDiffuseScale": 0,
-        "EnvironmentSpecularScale": 0
+        "EnvironmentSpecularScale": 0,
+        "GlobalShadows": true,
+        "ShadowSoftness": 0.15,
+        "ExposureCompensation": 0.05,
+        "LightingStyle": "Soft",
+        "PrioritizeLightingQuality": true,
+        "ColorShift_Top": [
+          0.2,
+          0.12,
+          0
+        ],
+        "ColorShift_Bottom": [
+          0,
+          0.06,
+          0.15
+        ]
       },
       "OceanAtmosphere": {
         "$className": "Atmosphere",
         "$properties": {
-          "Density": 0,
+          "Density": 0.08,
           "Offset": 0.1,
           "Color": [
-            0.6666666666666666,
-            1,
+            0.35,
+            0.95,
             1
           ],
           "Decay": [
-            0.6666666666666666,
-            1,
+            0.1,
+            0.8,
             1
           ],
           "Glare": 0,
           "Haze": 0
         }
-      }
+      },
+      "ClearSky": {
+        "$className": "Sky",
+        "$properties": {
+          "SkyboxBk": "rbxassetid://77692684904034",
+          "SkyboxDn": "rbxassetid://84056172634411",
+          "SkyboxFt": "rbxassetid://77692684904034",
+          "SkyboxLf": "rbxassetid://77692684904034",
+          "SkyboxRt": "rbxassetid://77692684904034",
+          "SkyboxUp": "rbxassetid://97640292155503",
+          "CelestialBodiesShown": false,
+          "StarCount": 0
+        }
+      },
+      "Bloom": {
+        "$className": "BloomEffect",
+        "$properties": {
+          "Enabled": true,
+          "Intensity": 0.12,
+          "Size": 20,
+          "Threshold": 1.8
+        }
+      },
+      "ReferenceGrade": {
+        "$className": "ColorCorrectionEffect",
+        "$properties": {
+          "Brightness": 0,
+          "Contrast": 0.08,
+          "Saturation": 0.12,
+          "TintColor": [
+            1,
+            1,
+            0.98
+          ]
+        }
+      },
+      "$className": "Lighting"
     },
     "ReplicatedStorage": {
       "ArmyConfig": {

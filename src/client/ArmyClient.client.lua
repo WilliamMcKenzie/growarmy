@@ -37,7 +37,7 @@ player.CameraMaxZoomDistance=85
 local function cameraSetup()
  task.wait(0.3)
  local r=player.Character and player.Character:FindFirstChild("HumanoidRootPart")
- if r then workspace.CurrentCamera.CFrame=CFrame.lookAt(r.Position+Vector3.new(0,48,42),r.Position) end
+ if r then workspace.CurrentCamera.CFrame=CFrame.lookAt(r.Position+Vector3.new(0,30,48),r.Position+Vector3.new(0,0,-12)) end
 end
 player.CharacterAdded:Connect(cameraSetup)
 if player.Character then task.spawn(cameraSetup) end

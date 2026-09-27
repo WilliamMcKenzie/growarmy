@@ -15,10 +15,10 @@ Open `Grow-an-Army.rbxlx` in Roblox Studio and press Play. Move with Roblox's st
 Local files are the source of truth. Rojo syncs them into Studio's edit-mode place; restart Play to run changed scripts.
 
 ```sh
-rojo serve default.project.json --port 34873
+rojo serve default.project.json --port 34872
 ```
 
-In Studio: Plugins → Rojo → connect to `localhost:34873`. The server was started during setup, but the Studio plugin connection has not been verified. Avoid editing Rojo-managed scripts or map parts directly in Studio: those changes do not automatically sync back to disk.
+In Studio: Plugins → Rojo → connect to `localhost:34872`. On this Mac, Control+Option+R is also assigned to Rojo Connect. Live sync was verified by adding and removing a temporary source comment on disk and checking it in Studio; all five scripts matched their local files. After pulling changes, stop and restart Play to execute the updated scripts. Avoid editing Rojo-managed scripts or map parts directly in Studio: those changes do not automatically sync back to disk.
 
 | File | Purpose |
 | --- | --- |
@@ -55,3 +55,7 @@ Troops now use miniature R15 avatar rigs. Neutral troops use plain Roblox bodies
 `AvatarTemplates.lua` caches avatar models; `TroopVisuals.client.lua` builds weapons and plays animations. Animations are Roblox-owned assets: idle 507766666, walk 507777826, tool hold 507768375, sword slash 522635514, soldier aim 4713633512, soldier fire 4713811763. Aim/fire were sourced from the official [Soldier NPC kit](https://create.roblox.com/store/asset/3924234975); they are temporary placeholders for both ranged classes, not custom bow/rocket animations. No third-party model scripts were imported.
 
 Scripts compile in Studio and the place builds with Rojo. Full motion, combat, and multiplayer playtesting remains with the user.
+
+## Reference lighting pass
+
+The field uses alternating close green tones with aligned tiled [stud textures](https://create.roblox.com/store/asset/10455712373). Lighting explicitly enables shadows with blue ambient fill, warm sunlight, modest saturation/contrast and bloom. A custom cloud-free cyan sky replaces the distant backdrop walls. Studio preview quality was raised for visual comparison; player graphics settings still affect detail and shadows.

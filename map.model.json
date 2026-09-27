@@ -38,16 +38,2500 @@
           600
         ],
         "Color": [
-          0.4392156862745098,
-          0.8666666666666667,
-          0.20784313725490197
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
         ],
         "Material": "Plastic",
-        "TopSurface": "Studs",
+        "TopSurface": "Smooth",
         "BottomSurface": "Smooth",
         "Transparency": 0,
         "CanCollide": true
       }
+    },
+    {
+      "Name": "Grass_0_0",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -250,
+              0.01,
+              -250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_0_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -250,
+              0.01,
+              -150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_0_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -250,
+              0.01,
+              -50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_0_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -250,
+              0.01,
+              50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_0_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -250,
+              0.01,
+              150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_0_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -250,
+              0.01,
+              250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_1_0",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -150,
+              0.01,
+              -250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_1_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -150,
+              0.01,
+              -150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_1_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -150,
+              0.01,
+              -50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_1_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -150,
+              0.01,
+              50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_1_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -150,
+              0.01,
+              150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_1_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -150,
+              0.01,
+              250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_2_0",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -50,
+              0.01,
+              -250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_2_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -50,
+              0.01,
+              -150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_2_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -50,
+              0.01,
+              -50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_2_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -50,
+              0.01,
+              50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_2_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -50,
+              0.01,
+              150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_2_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -50,
+              0.01,
+              250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_3_0",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              50,
+              0.01,
+              -250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_3_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              50,
+              0.01,
+              -150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_3_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              50,
+              0.01,
+              -50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_3_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              50,
+              0.01,
+              50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_3_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              50,
+              0.01,
+              150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_3_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              50,
+              0.01,
+              250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_4_0",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              150,
+              0.01,
+              -250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_4_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              150,
+              0.01,
+              -150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_4_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              150,
+              0.01,
+              -50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_4_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              150,
+              0.01,
+              50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_4_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              150,
+              0.01,
+              150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_4_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              150,
+              0.01,
+              250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_5_0",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              250,
+              0.01,
+              -250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_5_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              250,
+              0.01,
+              -150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_5_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              250,
+              0.01,
+              -50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_5_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              250,
+              0.01,
+              50
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_5_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              250,
+              0.01,
+              150
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5137254901960784,
+          0.8,
+          0.26666666666666666
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5137254901960784,
+              0.8,
+              0.26666666666666666
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Grass_5_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              250,
+              0.01,
+              250
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          100,
+          0.02,
+          100
+        ],
+        "Color": [
+          0.5333333333333333,
+          0.8235294117647058,
+          0.2549019607843137
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "Studs",
+          "ClassName": "Texture",
+          "Properties": {
+            "Face": "Top",
+            "Texture": "rbxassetid://10455712361",
+            "StudsPerTileU": 4,
+            "StudsPerTileV": 4,
+            "OffsetStudsU": 0,
+            "OffsetStudsV": 0,
+            "Color3": [
+              0.5333333333333333,
+              0.8235294117647058,
+              0.2549019607843137
+            ],
+            "Transparency": 0.05
+          }
+        }
+      ]
     },
     {
       "Name": "Ocean",
@@ -89,1395 +2573,6 @@
           0,
           0.8235294117647058,
           0.8823529411764706
-        ],
-        "Material": "Neon",
-        "TopSurface": "Smooth",
-        "BottomSurface": "Smooth",
-        "Transparency": 0,
-        "CanCollide": false,
-        "CastShadow": false
-      }
-    },
-    {
-      "Name": "HorizonNorth",
-      "ClassName": "Part",
-      "Properties": {
-        "Anchored": true,
-        "CFrame": {
-          "CFrame": {
-            "position": [
-              0,
-              1020,
-              -1024
-            ],
-            "orientation": [
-              [
-                1,
-                0,
-                0
-              ],
-              [
-                0,
-                1,
-                0
-              ],
-              [
-                0,
-                0,
-                1
-              ]
-            ]
-          }
-        },
-        "Size": [
-          2048,
-          2048,
-          1
-        ],
-        "Color": [
-          0.6666666666666666,
-          1,
-          1
-        ],
-        "Material": "Neon",
-        "TopSurface": "Smooth",
-        "BottomSurface": "Smooth",
-        "Transparency": 0,
-        "CanCollide": false,
-        "CastShadow": false
-      },
-      "Children": [
-        {
-          "Name": "SkyGradientFront",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Front",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientBack",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Back",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientLeft",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Left",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientRight",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Right",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "HorizonSouth",
-      "ClassName": "Part",
-      "Properties": {
-        "Anchored": true,
-        "CFrame": {
-          "CFrame": {
-            "position": [
-              0,
-              1020,
-              1024
-            ],
-            "orientation": [
-              [
-                1,
-                0,
-                0
-              ],
-              [
-                0,
-                1,
-                0
-              ],
-              [
-                0,
-                0,
-                1
-              ]
-            ]
-          }
-        },
-        "Size": [
-          2048,
-          2048,
-          1
-        ],
-        "Color": [
-          0.6666666666666666,
-          1,
-          1
-        ],
-        "Material": "Neon",
-        "TopSurface": "Smooth",
-        "BottomSurface": "Smooth",
-        "Transparency": 0,
-        "CanCollide": false,
-        "CastShadow": false
-      },
-      "Children": [
-        {
-          "Name": "SkyGradientFront",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Front",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientBack",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Back",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientLeft",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Left",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientRight",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Right",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "HorizonWest",
-      "ClassName": "Part",
-      "Properties": {
-        "Anchored": true,
-        "CFrame": {
-          "CFrame": {
-            "position": [
-              -1024,
-              1020,
-              0
-            ],
-            "orientation": [
-              [
-                1,
-                0,
-                0
-              ],
-              [
-                0,
-                1,
-                0
-              ],
-              [
-                0,
-                0,
-                1
-              ]
-            ]
-          }
-        },
-        "Size": [
-          1,
-          2048,
-          2048
-        ],
-        "Color": [
-          0.6666666666666666,
-          1,
-          1
-        ],
-        "Material": "Neon",
-        "TopSurface": "Smooth",
-        "BottomSurface": "Smooth",
-        "Transparency": 0,
-        "CanCollide": false,
-        "CastShadow": false
-      },
-      "Children": [
-        {
-          "Name": "SkyGradientFront",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Front",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientBack",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Back",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientLeft",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Left",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientRight",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Right",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "HorizonEast",
-      "ClassName": "Part",
-      "Properties": {
-        "Anchored": true,
-        "CFrame": {
-          "CFrame": {
-            "position": [
-              1024,
-              1020,
-              0
-            ],
-            "orientation": [
-              [
-                1,
-                0,
-                0
-              ],
-              [
-                0,
-                1,
-                0
-              ],
-              [
-                0,
-                0,
-                1
-              ]
-            ]
-          }
-        },
-        "Size": [
-          1,
-          2048,
-          2048
-        ],
-        "Color": [
-          0.6666666666666666,
-          1,
-          1
-        ],
-        "Material": "Neon",
-        "TopSurface": "Smooth",
-        "BottomSurface": "Smooth",
-        "Transparency": 0,
-        "CanCollide": false,
-        "CastShadow": false
-      },
-      "Children": [
-        {
-          "Name": "SkyGradientFront",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Front",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientBack",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Back",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientLeft",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Left",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Name": "SkyGradientRight",
-          "ClassName": "SurfaceGui",
-          "Properties": {
-            "Face": "Right",
-            "LightInfluence": 0,
-            "MaxDistance": 0,
-            "SizingMode": "FixedSize",
-            "CanvasSize": [
-              256,
-              256
-            ]
-          },
-          "Children": [
-            {
-              "Name": "Gradient",
-              "ClassName": "Frame",
-              "Properties": {
-                "Size": {
-                  "UDim2": [
-                    [
-                      1,
-                      0
-                    ],
-                    [
-                      1,
-                      0
-                    ]
-                  ]
-                },
-                "BorderSizePixel": 0,
-                "BackgroundColor3": [
-                  1,
-                  1,
-                  1
-                ]
-              },
-              "Children": [
-                {
-                  "Name": "Color",
-                  "ClassName": "UIGradient",
-                  "Properties": {
-                    "Rotation": 90,
-                    "Color": {
-                      "ColorSequence": {
-                        "keypoints": [
-                          {
-                            "time": 0,
-                            "color": [
-                              0.8823529411764706,
-                              1,
-                              1
-                            ]
-                          },
-                          {
-                            "time": 1,
-                            "color": [
-                              0.5882352941176471,
-                              0.9803921568627451,
-                              1
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "SkyTop",
-      "ClassName": "Part",
-      "Properties": {
-        "Anchored": true,
-        "CFrame": {
-          "CFrame": {
-            "position": [
-              0,
-              2044,
-              0
-            ],
-            "orientation": [
-              [
-                1,
-                0,
-                0
-              ],
-              [
-                0,
-                1,
-                0
-              ],
-              [
-                0,
-                0,
-                1
-              ]
-            ]
-          }
-        },
-        "Size": [
-          2048,
-          1,
-          2048
-        ],
-        "Color": [
-          0.8823529411764706,
-          1,
-          1
         ],
         "Material": "Neon",
         "TopSurface": "Smooth",

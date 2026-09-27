@@ -17,23 +17,18 @@ def part(name, position, size, class_name='Part', visible=False):
     items.append(obj)
     return obj
 
-part('Field', [0,-1,0], [600,2,600], visible=True)
+field = part('Field', [0,-1,0], [600,2,600], visible=True)
+field['Properties'].update({'Color':[136/255,210/255,65/255], 'TopSurface':'Smooth'})
+for x in range(6):
+    for z in range(6):
+        color = [136/255,210/255,65/255] if (x+z)%2 == 0 else [131/255,204/255,68/255]
+        tile = part(f'Grass_{x}_{z}',[-250+x*100,0.01,-250+z*100],[100,0.02,100],visible=True)
+        tile['Properties'].update({'Color':color,'TopSurface':'Smooth','CanCollide':False,'CastShadow':False})
+        tile['Children'] = [{'Name':'Studs','ClassName':'Texture','Properties':{
+            'Face':'Top','Texture':'rbxassetid://10455712361','StudsPerTileU':4,'StudsPerTileV':4,'OffsetStudsU':(x*100)%4,'OffsetStudsV':(z*100)%4,
+            'Color3':color,'Transparency':0.05}}]
 ocean = part('Ocean', [0,-3.5,0], [2048,1,2048], visible=True)
 ocean['Properties'].update({'Color':[0,210/255,225/255], 'Material':'Neon', 'TopSurface':'Smooth', 'CanCollide':False, 'CastShadow':False})
-# Four distant cyan backdrop faces give the reference's cloud-free horizon,
-# including on Studio graphics settings that do not render Atmosphere.
-for name, pos, size in [('North',[0,1020,-1024],[2048,2048,1]),('South',[0,1020,1024],[2048,2048,1]),('West',[-1024,1020,0],[1,2048,2048]),('East',[1024,1020,0],[1,2048,2048])]:
-    backdrop = part('Horizon'+name,pos,size,visible=True)
-    backdrop['Properties'].update({'Color':[170/255,1,1],'Material':'Neon','TopSurface':'Smooth','CanCollide':False,'CastShadow':False})
-    backdrop['Children'] = []
-    for face in ['Front','Back','Left','Right']:
-        backdrop['Children'].append({'Name':'SkyGradient'+face,'ClassName':'SurfaceGui','Properties':{'Face':face,'LightInfluence':0,'MaxDistance':0,'SizingMode':'FixedSize','CanvasSize':[256,256]},'Children':[
-            {'Name':'Gradient','ClassName':'Frame','Properties':{'Size':{'UDim2':[[1,0],[1,0]]},'BorderSizePixel':0,'BackgroundColor3':[1,1,1]},'Children':[
-                {'Name':'Color','ClassName':'UIGradient','Properties':{'Rotation':90,'Color':{'ColorSequence':{'keypoints':[{'time':0,'color':[225/255,1,1]},{'time':1,'color':[150/255,250/255,1]}]}}}}
-            ]}
-        ]})
-lid = part('SkyTop', [0,2044,0], [2048,1,2048], visible=True)
-lid['Properties'].update({'Color':[225/255,1,1],'Material':'Neon','TopSurface':'Smooth','CanCollide':False,'CastShadow':False})
 spawn = part('Spawn', [0,0.15,12], [8,0.3,8], 'SpawnLocation')
 spawn['Properties'].update({'Neutral': True, 'Duration': 0, 'CanCollide': True})
 for name, x in [('CashIn',-17), ('Upgrade',0), ('Recruit',17)]:
