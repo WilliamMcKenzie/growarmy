@@ -1,0 +1,2879 @@
+{
+  "ClassName": "Folder",
+  "Children": [
+    {
+      "Name": "Field",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              -1,
+              0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          600,
+          2,
+          600
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Studs",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": true
+      }
+    },
+    {
+      "Name": "Ocean",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              -3.5,
+              0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          2048,
+          1,
+          2048
+        ],
+        "Color": [
+          0,
+          0.8235294117647058,
+          0.8823529411764706
+        ],
+        "Material": "Neon",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      }
+    },
+    {
+      "Name": "HorizonNorth",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              1020,
+              -1024
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          2048,
+          2048,
+          1
+        ],
+        "Color": [
+          0.6666666666666666,
+          1,
+          1
+        ],
+        "Material": "Neon",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "SkyGradientFront",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Front",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientBack",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Back",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientLeft",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Left",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientRight",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Right",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "HorizonSouth",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              1020,
+              1024
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          2048,
+          2048,
+          1
+        ],
+        "Color": [
+          0.6666666666666666,
+          1,
+          1
+        ],
+        "Material": "Neon",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "SkyGradientFront",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Front",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientBack",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Back",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientLeft",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Left",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientRight",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Right",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "HorizonWest",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -1024,
+              1020,
+              0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          2048,
+          2048
+        ],
+        "Color": [
+          0.6666666666666666,
+          1,
+          1
+        ],
+        "Material": "Neon",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "SkyGradientFront",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Front",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientBack",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Back",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientLeft",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Left",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientRight",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Right",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "HorizonEast",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              1024,
+              1020,
+              0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          2048,
+          2048
+        ],
+        "Color": [
+          0.6666666666666666,
+          1,
+          1
+        ],
+        "Material": "Neon",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      },
+      "Children": [
+        {
+          "Name": "SkyGradientFront",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Front",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientBack",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Back",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientLeft",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Left",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "SkyGradientRight",
+          "ClassName": "SurfaceGui",
+          "Properties": {
+            "Face": "Right",
+            "LightInfluence": 0,
+            "MaxDistance": 0,
+            "SizingMode": "FixedSize",
+            "CanvasSize": [
+              256,
+              256
+            ]
+          },
+          "Children": [
+            {
+              "Name": "Gradient",
+              "ClassName": "Frame",
+              "Properties": {
+                "Size": {
+                  "UDim2": [
+                    [
+                      1,
+                      0
+                    ],
+                    [
+                      1,
+                      0
+                    ]
+                  ]
+                },
+                "BorderSizePixel": 0,
+                "BackgroundColor3": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Children": [
+                {
+                  "Name": "Color",
+                  "ClassName": "UIGradient",
+                  "Properties": {
+                    "Rotation": 90,
+                    "Color": {
+                      "ColorSequence": {
+                        "keypoints": [
+                          {
+                            "time": 0,
+                            "color": [
+                              0.8823529411764706,
+                              1,
+                              1
+                            ]
+                          },
+                          {
+                            "time": 1,
+                            "color": [
+                              0.5882352941176471,
+                              0.9803921568627451,
+                              1
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "SkyTop",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              2044,
+              0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          2048,
+          1,
+          2048
+        ],
+        "Color": [
+          0.8823529411764706,
+          1,
+          1
+        ],
+        "Material": "Neon",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 0,
+        "CanCollide": false,
+        "CastShadow": false
+      }
+    },
+    {
+      "Name": "Spawn",
+      "ClassName": "SpawnLocation",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              0.15,
+              12
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          8,
+          0.3,
+          8
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": true,
+        "Neutral": true,
+        "Duration": 0
+      }
+    },
+    {
+      "Name": "CashIn",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -17,
+              1,
+              -15
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          1,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      },
+      "Children": [
+        {
+          "Name": "Prompt",
+          "ClassName": "ProximityPrompt",
+          "Properties": {
+            "ActionText": "CashIn",
+            "ObjectText": "Barracks",
+            "Enabled": false,
+            "HoldDuration": 0.25,
+            "MaxActivationDistance": 12,
+            "RequiresLineOfSight": false
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Upgrade",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0,
+              1,
+              -15
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          1,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      },
+      "Children": [
+        {
+          "Name": "Prompt",
+          "ClassName": "ProximityPrompt",
+          "Properties": {
+            "ActionText": "Upgrade",
+            "ObjectText": "Barracks",
+            "Enabled": false,
+            "HoldDuration": 0.25,
+            "MaxActivationDistance": 12,
+            "RequiresLineOfSight": false
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Recruit",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              17,
+              1,
+              -15
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          1,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      },
+      "Children": [
+        {
+          "Name": "Prompt",
+          "ClassName": "ProximityPrompt",
+          "Properties": {
+            "ActionText": "Recruit",
+            "ObjectText": "Barracks",
+            "Enabled": false,
+            "HoldDuration": 0.25,
+            "MaxActivationDistance": 12,
+            "RequiresLineOfSight": false
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Camp_1_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0.0,
+              0.22,
+              67.0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_1_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              58.023702053557386,
+              0.22,
+              33.50000000000001
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_1_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              58.02370205355739,
+              0.22,
+              -33.499999999999986
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_1_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              8.205133554287266e-15,
+              0.22,
+              -67.0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_1_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -58.02370205355737,
+              0.22,
+              -33.50000000000003
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_1_6",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -58.023702053557386,
+              0.22,
+              33.50000000000001
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0.0,
+              0.22,
+              136.0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              96.16652224137046,
+              0.22,
+              96.16652224137047
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              136.0,
+              0.22,
+              8.327598234202001e-15
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              96.16652224137047,
+              0.22,
+              -96.16652224137046
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              1.6655196468404002e-14,
+              0.22,
+              -136.0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_6",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -96.16652224137046,
+              0.22,
+              -96.16652224137049
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_7",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -136.0,
+              0.22,
+              -2.4982794702606005e-14
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_2_8",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -96.16652224137049,
+              0.22,
+              96.16652224137044
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_1",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              0.0,
+              0.22,
+              227.0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_2",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              133.4272522703914,
+              0.22,
+              183.64685772311307
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_3",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              215.88982919899985,
+              0.22,
+              70.14685772311307
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_4",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              215.88982919899988,
+              0.22,
+              -70.14685772311304
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_5",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              133.42725227039142,
+              0.22,
+              -183.64685772311304
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_6",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              2.7799482340644916e-14,
+              0.22,
+              -227.0
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_7",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -133.42725227039136,
+              0.22,
+              -183.64685772311307
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_8",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -215.88982919899985,
+              0.22,
+              -70.1468577231131
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_9",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -215.88982919899988,
+              0.22,
+              70.14685772311302
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    },
+    {
+      "Name": "Camp_3_10",
+      "ClassName": "Part",
+      "Properties": {
+        "Anchored": true,
+        "CFrame": {
+          "CFrame": {
+            "position": [
+              -133.42725227039145,
+              0.22,
+              183.64685772311304
+            ],
+            "orientation": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          }
+        },
+        "Size": [
+          1,
+          0.3,
+          1
+        ],
+        "Color": [
+          0.4392156862745098,
+          0.8666666666666667,
+          0.20784313725490197
+        ],
+        "Material": "Plastic",
+        "TopSurface": "Smooth",
+        "BottomSurface": "Smooth",
+        "Transparency": 1,
+        "CanCollide": false
+      }
+    }
+  ]
+}

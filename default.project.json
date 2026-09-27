@@ -1,0 +1,78 @@
+{
+  "name": "Grow an Army - Prototype",
+  "tree": {
+    "$className": "DataModel",
+    "Workspace": {
+      "$properties": {
+        "Gravity": 196.2
+      },
+      "Map": {
+        "$path": "map.model.json"
+      }
+    },
+    "Lighting": {
+      "$properties": {
+        "ClockTime": 14,
+        "Brightness": 2,
+        "Ambient": [
+          0.6,
+          0.75,
+          0.8
+        ],
+        "OutdoorAmbient": [
+          0.65,
+          0.8,
+          0.85
+        ],
+        "EnvironmentDiffuseScale": 0,
+        "EnvironmentSpecularScale": 0
+      },
+      "OceanAtmosphere": {
+        "$className": "Atmosphere",
+        "$properties": {
+          "Density": 0,
+          "Offset": 0.1,
+          "Color": [
+            0.6666666666666666,
+            1,
+            1
+          ],
+          "Decay": [
+            0.6666666666666666,
+            1,
+            1
+          ],
+          "Glare": 0,
+          "Haze": 0
+        }
+      }
+    },
+    "ReplicatedStorage": {
+      "ArmyConfig": {
+        "$path": "src/shared/ArmyConfig.lua"
+      }
+    },
+    "ServerScriptService": {
+      "ArmyServer": {
+        "$path": "src/server/ArmyServer.server.lua"
+      },
+      "AvatarTemplates": {
+        "$path": "src/server/AvatarTemplates.lua"
+      }
+    },
+    "StarterPlayer": {
+      "$properties": {
+        "CameraMinZoomDistance": 25,
+        "CameraMaxZoomDistance": 85
+      },
+      "StarterPlayerScripts": {
+        "ArmyClient": {
+          "$path": "src/client/ArmyClient.client.lua"
+        },
+        "TroopVisuals": {
+          "$path": "src/client/TroopVisuals.client.lua"
+        }
+      }
+    }
+  }
+}
