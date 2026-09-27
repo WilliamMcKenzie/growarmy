@@ -18,7 +18,7 @@ Outside combat, troops independently choose world-space destinations inside the 
 
 Crossing outside the radius switches a troop into return mode with a fresh destination. Return mode stays active until arrival and uses the master's **current `Humanoid.WalkSpeed` exactly**, including changes to it; class speed penalties do not apply. The player's initial speed is 23. Equal speed means a trailing troop cannot gain on a player running straight away at full speed; it closes the gap when the player slows, stops, or changes direction. Combat takes priority over roaming and can take troops beyond the circle.
 
-`ArmyConfig.Roaming.Radius` is the single source for both navigation and the player circle. The circle is a thin 96-segment outline projected onto the floor below the player, visible only to that player; it hides during death or when no ground is found. Red follows the authoritative `InBattle` attribute, not nearby visual effects. Enable `ArmyConfig.SpawnEnemies` to exercise combat and the red state.
+`ArmyConfig.Roaming.Radius` is the single source for both navigation and the player circle. The circle is a thin, non-glowing outline of 48 dashes at 50% opacity, projected onto the floor below the player and visible only to that player; it hides during death or when no ground is found. Red follows the authoritative `InBattle` attribute, not nearby visual effects. Enable `ArmyConfig.SpawnEnemies` to exercise combat and the red state.
 
 ## Troop architecture
 

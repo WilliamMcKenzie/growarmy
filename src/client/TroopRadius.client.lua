@@ -7,21 +7,22 @@ local player = Players.LocalPlayer
 local ring = Instance.new("Folder")
 ring.Name = "TroopNavigationRadius"
 local segments = {}
-local count = 96
+local count = 48
+local dashFraction = 0.55
 for i = 1, count do
  local a = (i - 1) * math.pi * 2 / count
- local b = i * math.pi * 2 / count
+ local b = (i - 1 + dashFraction) * math.pi * 2 / count
  local start = Vector3.new(math.cos(a), 0, math.sin(a)) * C.Roaming.Radius
  local finish = Vector3.new(math.cos(b), 0, math.sin(b)) * C.Roaming.Radius
  local offset = CFrame.lookAt((start + finish) / 2, finish)
  local part = Instance.new("Part")
- part.Name = "Arc"
- part.Size = Vector3.new(0.12, 0.04, (finish - start).Magnitude + 0.01)
+ part.Name = "Dash"
+ part.Size = Vector3.new(0.12, 0.04, (finish - start).Magnitude)
  part.Anchored = true
  part.CanCollide = false; part.CanTouch = false; part.CanQuery = false
  part.CastShadow = false
- part.Material = Enum.Material.Neon
- part.Transparency = 0.2
+ part.Material = Enum.Material.SmoothPlastic
+ part.Transparency = 0.5
  part.Parent = ring
  segments[i] = {part = part, offset = offset}
 end
