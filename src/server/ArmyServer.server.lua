@@ -14,6 +14,7 @@ local profiles, camps = {}, {}
 local store = not RunService:IsStudio() and DataStoreService:GetDataStore("GrowArmyPrototype_v1") or nil
 local uid = 0
 local Avatars = require(script.Parent:WaitForChild("AvatarTemplates"))
+local roamingRandom = Random.new()
 
 local function flat(v) return Vector3.new(v.X, 0, v.Z) end
 local function root(player) return player.Character and player.Character:FindFirstChild("HumanoidRootPart") end
@@ -169,15 +170,42 @@ local function nearest(u,enemies)
  end
  return best,dist
 end
-local function stepToward(u,target,dt,face)
+local function stepToward(u,target,dt,face,speed)
  local d=flat(target-u.pos)
  local pos=u.pos
- if d.Magnitude>0.1 then pos+=d.Unit*math.min(d.Magnitude,C.Classes[u.class].Speed*dt) end
+ if d.Magnitude>0.1 then pos+=d.Unit*math.min(d.Magnitude,(speed or C.Classes[u.class].Speed)*dt) end
  move(u,pos,face or target)
+end
+local function pickRoamTarget(u,center)
+ local angle=roamingRandom:NextNumber(0,math.pi*2)
+ -- Sample the disk evenly, leaving a little room inside the follow boundary.
+ local radius=math.sqrt(roamingRandom:NextNumber())*C.Roaming.Radius*0.85
+ u.roamTarget=Vector3.new(center.X+math.cos(angle)*radius,u.pos.Y,center.Z+math.sin(angle)*radius)
+ u.roamSpeed=roamingRandom:NextNumber(C.Roaming.WalkSpeedMin,C.Roaming.WalkSpeedMax)
+end
+local function roam(u,center,dt)
+ local settings=C.Roaming
+ local outside=flat(u.pos-center).Magnitude>settings.Radius
+ local arrived=u.roamTarget and flat(u.roamTarget-u.pos).Magnitude<=settings.ArrivalDistance
+ if arrived then
+  u.returning=false
+  u.roamTarget=nil
+ end
+ -- Latch the run until arrival, even after crossing back inside the radius.
+ if outside and not u.returning then
+  u.returning=true
+  u.roamTarget=nil
+ end
+ -- Destinations stay in world space. Only replace one if the master leaves it behind.
+ if not u.roamTarget or flat(u.roamTarget-center).Magnitude>settings.Radius then
+  pickRoamTarget(u,center)
+ end
+ stepToward(u,u.roamTarget,dt,nil,u.returning and settings.ReturnSpeed or u.roamSpeed)
 end
 local function fight(units,enemies,now,dt)
  for _,u in ipairs(units) do
   if u.hp<=0 then continue end
+  u.roamTarget=nil;u.returning=false
   local target,d=nearest(u,enemies)
   if not target then continue end
   local s=C.Classes[u.class]
@@ -250,17 +278,10 @@ RunService.Heartbeat:Connect(function(dt)
     announce(player,"Camp captured! Recruits joined your army — bank them or push farther.")
    end
   else
-   local n=0
-   for _,class in ipairs(C.Order) do
-    for _,u in ipairs(p.units) do
-     if u.class~=class then continue end
-     n+=1
-     local row=math.floor((n-1)/6)
-     local localPos=Vector3.new(((n-1)%6-2.5)*3,0,7+row*3)
-     local target=r.CFrame:PointToWorldSpace(localPos)
-     stepToward(u,Vector3.new(target.X,0.3,target.Z),dt)
-     if atBase(player) then u.hp=C.Classes[u.class].Health end
-    end
+   local healing=atBase(player)
+   for _,u in ipairs(p.units) do
+    roam(u,r.Position,dt)
+    if healing then u.hp=C.Classes[u.class].Health end
    end
   end
   sync(player)

@@ -48,6 +48,8 @@ Visuals are primitive blocks. Units use simple direct movement rather than obsta
 
 Enemy spawning is disabled (`ArmyConfig.SpawnEnemies = false`) and the game HUD, prompts, overhead player name, and standard CoreGui panels are hidden. Start Play to walk with four starter swordsmen; upgrade UI and enemy camps are intentionally unavailable in this mode. Roblox may retain its platform menu button.
 
+Outside combat, each troop wanders between random points within 18 studs of its master at 4–6 studs per second, including while the master is AFK. Troops outside that radius choose a fresh point inside it and run at 32 studs per second until they arrive. Destinations stay fixed unless the master moves far enough to leave them outside the radius. Tune these distances and speeds in `ArmyConfig.Roaming`.
+
 Troops now use miniature R15 avatar rigs. Neutral troops use plain Roblox bodies; owned troops clone a cached version of their owner's appearance, with class weapons attached to the hands. The server simulates invisible troop markers; clients render nearby animated rigs and interpolate movement. Only the visual model changes on capture, preserving combat stats and class.
 
 `AvatarTemplates.lua` caches avatar models; `TroopVisuals.client.lua` builds weapons and plays animations. Animations are Roblox-owned assets: idle 507766666, walk 507777826, tool hold 507768375, sword slash 522635514, soldier aim 4713633512, soldier fire 4713811763. Aim/fire were sourced from the official [Soldier NPC kit](https://create.roblox.com/store/asset/3924234975); they are temporary placeholders for both ranged classes, not custom bow/rocket animations. No third-party model scripts were imported.

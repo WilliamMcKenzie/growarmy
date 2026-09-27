@@ -3,6 +3,13 @@ Config.SpawnEnemies = false
 Config.SafeRadius = 36
 Config.ArmyCap = 60
 Config.StarterCap = 12
+Config.Roaming = {
+	Radius = 18,
+	ArrivalDistance = 0.6,
+	WalkSpeedMin = 4,
+	WalkSpeedMax = 6,
+	ReturnSpeed = 32, -- Faster than the master's 23-stud walking speed.
+}
 Config.Classes = {
 	Swordsman = {Health = 75, Damage = 15, Range = 6, Cooldown = 0.75, Speed = 23, Value = 12, Color = Color3.fromRGB(89, 182, 255)},
 	Archer = {Health = 42, Damage = 12, Range = 32, Cooldown = 1.05, Speed = 22, Value = 22, Color = Color3.fromRGB(112, 228, 149)},
