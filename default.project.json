@@ -12,40 +12,41 @@
     },
     "Lighting": {
       "$properties": {
-        "ClockTime": 16,
-        "Brightness": 2.5,
+        "Brightness": 1.6,
         "Ambient": [
-          0.12,
-          0.29,
-          0.48
+          0.3,
+          0.52,
+          0.72
         ],
         "OutdoorAmbient": [
-          0.26,
-          0.48,
-          0.66
+          0.5686274509803921,
+          0.7843137254901961,
+          0.9215686274509803
         ],
         "EnvironmentDiffuseScale": 0,
         "EnvironmentSpecularScale": 0,
         "GlobalShadows": true,
-        "ShadowSoftness": 0.15,
-        "ExposureCompensation": 0.05,
-        "LightingStyle": "Soft",
+        "ShadowSoftness": 0.08,
+        "ExposureCompensation": 0,
+        "LightingStyle": "Realistic",
         "PrioritizeLightingQuality": true,
         "ColorShift_Top": [
-          0.2,
-          0.12,
+          0.08,
+          0.05,
           0
         ],
         "ColorShift_Bottom": [
           0,
-          0.06,
-          0.15
-        ]
+          0,
+          0
+        ],
+        "GeographicLatitude": 0,
+        "TimeOfDay": "09:00:00"
       },
       "OceanAtmosphere": {
         "$className": "Atmosphere",
         "$properties": {
-          "Density": 0.08,
+          "Density": 0,
           "Offset": 0.1,
           "Color": [
             0.35,
@@ -64,12 +65,12 @@
       "ClearSky": {
         "$className": "Sky",
         "$properties": {
-          "SkyboxBk": "rbxassetid://77692684904034",
-          "SkyboxDn": "rbxassetid://84056172634411",
-          "SkyboxFt": "rbxassetid://77692684904034",
-          "SkyboxLf": "rbxassetid://77692684904034",
-          "SkyboxRt": "rbxassetid://77692684904034",
-          "SkyboxUp": "rbxassetid://97640292155503",
+          "SkyboxBk": "rbxassetid://109826324717189",
+          "SkyboxDn": "rbxassetid://98490350565753",
+          "SkyboxFt": "rbxassetid://109826324717189",
+          "SkyboxLf": "rbxassetid://109826324717189",
+          "SkyboxRt": "rbxassetid://109826324717189",
+          "SkyboxUp": "rbxassetid://76394784887083",
           "CelestialBodiesShown": false,
           "StarCount": 0
         }
@@ -78,9 +79,9 @@
         "$className": "BloomEffect",
         "$properties": {
           "Enabled": true,
-          "Intensity": 0.12,
+          "Intensity": 0.06,
           "Size": 20,
-          "Threshold": 1.8
+          "Threshold": 2
         }
       },
       "ReferenceGrade": {
@@ -88,7 +89,7 @@
         "$properties": {
           "Brightness": 0,
           "Contrast": 0.08,
-          "Saturation": 0.12,
+          "Saturation": 0.08,
           "TintColor": [
             1,
             1,
@@ -96,7 +97,13 @@
           ]
         }
       },
-      "$className": "Lighting"
+      "$className": "Lighting",
+      "ColorGrading": {
+        "$className": "ColorGradingEffect",
+        "$properties": {
+          "TonemapperPreset": "Retro"
+        }
+      }
     },
     "ReplicatedStorage": {
       "ArmyConfig": {

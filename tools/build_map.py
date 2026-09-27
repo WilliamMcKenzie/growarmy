@@ -23,7 +23,7 @@ for x in range(24):
     for z in range(24):
         color = [136/255,210/255,65/255] if (x+z)%2 == 0 else [131/255,204/255,68/255]
         tile = part(f'Grass_{x}_{z}',[-287.5+x*25,0.01,-287.5+z*25],[25,0.02,25],visible=True)
-        tile['Properties'].update({'Color':color,'TopSurface':'Smooth','CanCollide':False,'CastShadow':False})
+        tile['Properties'].update({'Color':color,'Material':'Plastic','TopSurface':'Smooth','CanCollide':False,'CastShadow':False})
         tile['Children'] = [{'Name':'Studs','ClassName':'Texture','Properties':{
             'Face':'Top','Texture':'rbxassetid://10455712361','StudsPerTileU':4,'StudsPerTileV':4,'OffsetStudsU':(x*25)%4,'OffsetStudsV':(z*25)%4,
             'Color3':color,'Transparency':0.05}}]

@@ -102,4 +102,6 @@ Animations are Roblox-owned placeholders: idle 507766666, walk 507777826, hold 5
 
 ## Reference lighting pass
 
-The field uses subtle alternating greens in 25-stud squares with aligned tiled [stud textures](https://create.roblox.com/store/asset/10455712373). Lighting enables shadows with blue ambient fill, warm sunlight, modest saturation/contrast and bloom. A custom cloud-free cyan sky replaces the distant backdrop walls. Player graphics settings affect detail and shadows.
+The field uses subtle alternating greens in 25-stud squares with aligned tiled [stud textures](https://create.roblox.com/store/asset/10455712373). Lighting uses Realistic lighting, a 09:00 sun at latitude 0, blue ambient fill, warm highlights, Retro tone mapping, and restrained bloom. A custom cloud-free cyan-to-pale-cyan sky replaces the distant backdrop walls. Settings live in `default.project.json`; use serialized `TimeOfDay` for reliable Rojo syncing. Player graphics settings affect detail and shadows.
+
+`python3 tools/build_sky.py` regenerates the sky-face PNGs in `assets/sky`. Changed sky images must be uploaded to Roblox and their asset IDs updated in `ClearSky`; Rojo does not upload PNGs automatically.
